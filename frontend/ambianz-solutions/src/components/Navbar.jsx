@@ -1,19 +1,28 @@
 import React from 'react'
 import logo from '../images/logo.png'
 //import Simple_logo from '../images/Simple_logo.png'
-import hero from "../images/hero.jpg"
+
 import { IoSearch } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { GrFavorite } from "react-icons/gr";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+
 
 
 const Navbar = () => {
     return (
 
         <>
-        {/* -------------------------- Navbar--------------------------- */}
+            {/* -------------------------- Navbar--------------------------- */}
             <div className='navbar w-[full]  '>
+                <div className="w-full h-[20px] bg-green-900 text-white flex p-[8px] justify-between items-center">
+                    <span className='text-[12px]'>Free delivery on orders above 5000-/</span>
+                    <div className="flex items-center justify-center gap-1 cursor-pointer">
+                        <span className="text-[12px]">Close</span>
+                        <IoMdClose className='text-[12px] text-white' />
+                    </div>
+                </div>
                 {/* Top Navbar */}
                 <div className="top-navbar w-full h-[55px] flex items-center justify-between border-b-[1px] border-solid border-gray-300   ">
                     <div className="flex items-center justify-center">
@@ -40,27 +49,23 @@ const Navbar = () => {
                     </div>
                 </div>
                 {/*-------------- Mid Navbar--------- */}
-                <div className="mid-navbar flex items-center justify-center gap-[20px] m-[8px] pb-[5px] bg-[#f0ece4] bg-white ">
-                    <p className='font-semibold text-[20px] font-raleway text-gray-800 cursor-pointer border-b-2 border-transparent hover:border-[#FFF44F] transition-all duration-300 '>Home</p>
-                    <p className='font-semibold text-[20px] font-raleway text-gray-800'>Shop</p>
-                    <p className='font-semibold text-[20px] font-raleway text-gray-800'>Services</p>
-                    <p className='font-semibold text-[20px] font-raleway text-gray-800'>Contact</p>
+                <div className="mid-navbar flex items-center justify-center gap-[20px] m-[6px] pb-[5px] bg-[#f0ece4] bg-white ">
+                    <p className='font-semibold text-[15px] font-raleway text-gray-800 cursor-pointer border-b-2 border-transparent hover:border-[#FFF44F] transition-all duration-300 '>HOME</p>
+                    <p className='font-semibold text-[15px] font-raleway text-gray-800'>SHOP</p>
+                    <p className='font-semibold text-[15px] font-raleway text-gray-800'>SERVICES</p>
+                    <p className='font-semibold text-[15px] font-raleway text-gray-800'>CONTACT</p>
                 </div>
                 <div className="bottom-navbar w-full h-[50px] bg-[#f0ece4] p-[10px] flex items-center justify-center gap-[20px]  ">
-                    <button className='rounded-[15px] outline-none border-none bg-yellow-300 p-[4px] text-[14px] w-[100px] font-raleway '>Lighting</button>
-                    <button className='rounded-[20px] outline-none border-none bg-yellow-300  p-[4px] text-[14px] w-[100px] font-raleway' >Furniture</button>
-                    <button className='rounded-[20px] outline-none border-none bg-yellow-300  p-[4px] text-[14px] w-[100px] font-raleway' >Home Decor</button>
-                    <button className='rounded-[20px] outline-none border-none bg-yellow-300  p-[4px] text-[14px] w-[100px] font-raleway' >Hardware</button>
-                    <button className='rounded-[20px] outline-none border-none bg-yellow-300  p-[4px] text-[14px] w-[100px] font-raleway' >Mirror</button>
+                    <button className='rounded-[15px] outline-none border-none bg-[#e4d722] text-white p-[4px] text-[14px] w-[100px] font-raleway '>Lighting</button>
+                    <button className='rounded-[20px] outline-none border-none  bg-[#e4d722] text-white  p-[4px] text-[14px] w-[100px] font-raleway' >Furniture</button>
+                    <button className='rounded-[20px] outline-none border-none bg-[#e4d722] p-[4px] text-[14px] w-[100px] font-raleway' >Home Decor</button>
+                    <button className='rounded-[20px] outline-none border-none bg-[#e4d722]  p-[4px] text-[14px] w-[100px] font-raleway' >Hardware</button>
+                    <button className='rounded-[20px] outline-none border-none bg-[#e4d722]  p-[4px] text-[14px] w-[100px] font-raleway' >Mirror</button>
+                    <button className='rounded-[20px] outline-none border-none bg-[#e4d722]  p-[4px] text-[14px] w-[100px] font-raleway' >Curtains</button>
                 </div>
             </div>
 
-        {/* // -------HERO SECTION----------- */}
-            <div className="herosection">
-                <div className="img w-full">
-                    <img src={hero} alt="" />
-                </div>
-            </div>
+
 
         </>
 
