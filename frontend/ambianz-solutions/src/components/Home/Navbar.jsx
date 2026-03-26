@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { GrFavorite } from "react-icons/gr";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -15,7 +16,7 @@ const Navbar = () => {
 
         <>
             {/* -------------------------- Navbar--------------------------- */}
-            <div className='navbar w-[full]  '>
+            <div className='navbar w-full sticky top-0 z-50  '>
                 <div className="w-full h-[20px] bg-[#f0ece4] text-black flex p-[8px] justify-between items-center">
                     <span className='text-[12px]'>Free delivery on orders above 5000-/</span>
                     <div className="flex items-center justify-center gap-1 cursor-pointer">
@@ -49,11 +50,40 @@ const Navbar = () => {
                     </div>
                 </div>
                 {/*-------------- Mid Navbar--------- */}
-                <div className="mid-navbar flex items-center justify-center gap-[22px] m-[4px] pt-[3px] bg-[#f0ece4] bg-white  ">
-                    <p className='font-semibold text-[15px] font-cinzel text-gray-800 cursor-pointer border-b-2 border-transparent hover:border-[#FFF44F] transition-all duration-300 '>HOME</p>
-                    <p className='font-semibold text-[15px] font-cinzel text-gray-800'>SHOP</p>
-                    <p className='font-semibold text-[15px] font-cinzel text-gray-800'>SERVICES</p>
-                    <p className='font-semibold text-[15px] font-cinzel text-gray-800'>CONTACT</p>
+
+
+                <div className="mid-navbar flex items-center justify-center gap-[22px] m-[4px] pt-[3px] bg-white">
+                    <NavLink to="/" className={({ isActive }) => `font-semibold text-[15px] font-cinzel text-gray-800 cursor-pointer border-b-2 transition-all duration-300 ${isActive ? 'border-[#FFF44F]' : 'border-transparent hover:border-[#FFF44F]'}`
+                    }>
+                        HOME
+                    </NavLink>
+
+                    <NavLink to="/shop"
+                        className={({ isActive }) =>
+                            `font-semibold text-[15px] font-cinzel text-gray-800 cursor-pointer border-b-2
+             transition-all duration-300
+             ${isActive ? 'border-[#FFF44F]' : 'border-transparent hover:border-[#FFF44F]'}`
+                        }>
+                        SHOP
+                    </NavLink>
+
+                    <NavLink to="/services"
+                        className={({ isActive }) =>
+                            `font-semibold text-[15px] font-cinzel text-gray-800 cursor-pointer border-b-2
+             transition-all duration-300
+             ${isActive ? 'border-[#FFF44F]' : 'border-transparent hover:border-[#FFF44F]'}`
+                        }>
+                        SERVICES
+                    </NavLink>
+
+                    <NavLink to="/getquote"
+                        className={({ isActive }) =>
+                            `font-semibold text-[15px] font-cinzel text-gray-800 cursor-pointer border-b-2
+             transition-all duration-300
+             ${isActive ? 'border-[#FFF44F]' : 'border-transparent hover:border-[#FFF44F]'}`
+                        }>
+                        Get a Quote
+                    </NavLink>
                 </div>
                 <div className="bottom-navbar w-full h-[50px] bg-gray-200 p-[10px] flex items-center justify-center gap-[20px]  ">
                     <button className='rounded-[15px] outline-none border-none  bg-[white] text-gray-800 p-[4px] text-[14px] w-[100px] font-raleway '>Lighting</button>

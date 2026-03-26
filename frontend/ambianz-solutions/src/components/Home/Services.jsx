@@ -3,7 +3,7 @@ import mediawall from "../../images/mediawall.jpg"
 import kitchendesign from "../../images/kitchendesign.jpg"
 import closet from "../../images/closet.jpg"
 
-const Services = () => {
+const MiniServices = () => {
   return (
     <div className='py-14 px-10'>
 
@@ -143,4 +143,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default MiniServices

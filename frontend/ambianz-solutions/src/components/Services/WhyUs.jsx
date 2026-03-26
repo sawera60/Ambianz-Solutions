@@ -129,7 +129,6 @@ const WhyUs = () => {
                     </div>
                 ))}
             </div>
-
         </div>
     )
 }

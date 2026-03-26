@@ -4,17 +4,17 @@ import Herosection from './Herosection'
 import Collection from './Collection'
 import Footer from './Footer'
 import Bestseller from './Bestseller'
-import Services from './Services'
 import Process from "./Process"
+import MiniServices from './Services'
 
 const Home = () => {
     return (
         <>
-            <Navbar />
+           
             <Herosection />
             <Bestseller />
             <Collection />
-            <Services />
+            <MiniServices />
             <Process />
             <Footer />
 
