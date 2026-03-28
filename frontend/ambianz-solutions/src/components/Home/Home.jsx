@@ -6,16 +6,22 @@ import Footer from './Footer'
 import Bestseller from './Bestseller'
 import Process from "./Process"
 import MiniServices from './Services'
+import Bottomfeature from './bottomfeature'
+import Newsletter from './Newsletter'
+
+
 
 const Home = () => {
     return (
         <>
-           
+          
             <Herosection />
             <Bestseller />
             <Collection />
             <MiniServices />
+            <Bottomfeature />
             <Process />
+            <Newsletter />
             <Footer />
 
         </>

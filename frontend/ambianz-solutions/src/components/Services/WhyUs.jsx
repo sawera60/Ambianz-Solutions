@@ -41,8 +41,7 @@ const WhyUs = () => {
                     <div className='h-[1px] w-[60px] bg-gradient-to-l from-transparent to-[#d1c400]' />
                 </div>
                 <h2 className='font-cinzel text-[42px] font-bold
-                               bg-gradient-to-r from-[#3c5a25] via-[#d1c400] to-[#3c5a25]
-                               bg-clip-text text-transparent'>
+                             text-gray-900 leading-tight'>  {/* ✅ text-gray-900 */}
                     Why Choose Us?
                 </h2>
                 <p className='font-raleway text-[14px] text-gray-400 mt-4   

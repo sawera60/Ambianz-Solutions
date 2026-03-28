@@ -1,12 +1,12 @@
 import React from 'react'
 
 const GetQuote = () => {
-  return (
-    
-    <div className='min-h-screen bg-white'>
+    return (
+
+        <div className='min-h-screen bg-white'>
 
             {/* Hero Banner */}
-            <div className='relative bg-green-900 py-16 px-10 text-center overflow-hidden'>
+            {/* <div className='relative bg-green-900 py-16 px-10 text-center overflow-hidden'>
                 <div className='absolute top-0 left-0 w-[300px] h-[300px] rounded-full
                                 bg-yellow-600/10 blur-[100px] pointer-events-none' />
                 <div className='absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full
@@ -31,6 +31,34 @@ const GetQuote = () => {
                     Fill in the form below and our expert designers will get back
                     to you within 24 hours with a free 3D preview.
                 </p>
+            </div> */}
+           
+             <div className='relative w-full h-[280px] overflow-hidden'>
+                <img
+                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000"
+                    alt="Shop Banner"
+                    className='w-full h-full object-cover'
+                />
+                <div className='absolute inset-0 bg-black/55' />
+                <div className='absolute inset-0 flex flex-col items-center justify-center text-center'>
+                    <div className='flex items-center gap-3 mb-3'>
+                        <div className='h-[1px] w-[40px] bg-[#d1c400]' />
+                        <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
+                            Browse
+                        </span>
+                        <div className='h-[1px] w-[40px] bg-[#d1c400]' />
+                    </div>
+                    <h1 className='font-cinzel text-[36px] font-bold text-white'>
+                       Let's Create Something Beautiful Together
+                    </h1>
+                    {/* <p className='font-raleway text-[13px] text-white/60 mt-2'>
+                        Curated for premium living
+                    </p> */}
+                    <p className='font-raleway text-[14px] text-white/50 mt-4 max-w-[500px] mx-auto'>
+                    Fill in the form below and our expert designers will get back
+                    to you within 24 hours with a free 3D preview.
+                </p>
+                </div>
             </div>
 
             {/* Steps Progress Bar */}
@@ -47,13 +75,13 @@ const GetQuote = () => {
                             <div className={`w-[44px] h-[44px] flex items-center justify-center
                                             border-2 font-cinzel text-[13px] font-bold
                                             ${index === 0
-                                                ? 'border-[#d1c400] text-[#d1c400] bg-[#d1c400]/10'
-                                                : 'border-gray-200 text-gray-300'
-                                            }`}>
+                                    ? 'border-[#d1c400] text-[#d1c400] bg-[#d1c400]/10'
+                                    : 'border-gray-300 text-gray-500'
+                                }`}>
                                 {step.number}
                             </div>
                             <span className={`font-raleway text-[11px] tracking-widest uppercase
-                                             ${index === 0 ? 'text-[#d1c400]' : 'text-gray-300'}`}>
+                                             ${index === 0 ? 'text-[#d1c400]' : 'text-gray-500'}`}>
                                 {step.label}
                             </span>
                         </div>
@@ -65,12 +93,12 @@ const GetQuote = () => {
             </div>
 
             {/* Form Area */}
-            <div className='max-w-[750px] mx-auto py-14 px-6'>
+            <div className=' max-w-[750px]  mx-auto py-14 px-6 '>
 
                 {/* Step 1 — Choose Service */}
                 <div className='mb-12'>
                     <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-gray-100'>01</span>
+                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>01</span>
                         <div>
                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
                                 Which Service Are You Interested In?
@@ -89,7 +117,7 @@ const GetQuote = () => {
                             { icon: "📺", label: "Media Wall", desc: "Stunning entertainment focal points" },
                         ].map((service, index) => (
                             <div key={index}
-                                 className='flex items-center gap-4 p-5 border-2 border-gray-100
+                                className='flex items-center gap-4 p-5 border-2 border-gray-100
                                             hover:border-[#d1c400] cursor-pointer
                                             transition-all duration-300 group'>
                                 <span className='text-[28px]'>{service.icon}</span>
@@ -113,7 +141,7 @@ const GetQuote = () => {
                 {/* Step 2 — Your Details */}
                 <div className='mb-12'>
                     <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-gray-100'>02</span>
+                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>02</span>
                         <div>
                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
                                 Your Details
@@ -173,12 +201,12 @@ const GetQuote = () => {
                 </div>
 
                 {/* Divider */}
-                <div className='h-[1px] bg-gray-100 mb-12' />
+                <div className='h-[1px] bg-gray-200 mb-12' />
 
                 {/* Step 3 — Project Details */}
                 <div className='mb-12'>
                     <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-gray-100'>03</span>
+                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>03</span>
                         <div>
                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
                                 Project Details
@@ -270,7 +298,7 @@ const GetQuote = () => {
 
                 {/* Step 4 — Submit */}
                 <div className='flex flex-col items-center gap-4 text-center'>
-                    <span className='font-cinzel text-[32px] font-bold text-gray-100'>04</span>
+                    <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>04</span>
                     <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
                         Ready to Transform Your Space?
                     </h3>
@@ -299,7 +327,7 @@ const GetQuote = () => {
 
             </div>
         </div>
-  )
+    )
 }
 
 export default GetQuote
