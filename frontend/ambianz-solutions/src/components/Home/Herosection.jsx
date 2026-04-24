@@ -1,155 +1,433 @@
 
-import React from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectFade } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/effect-fade'
 
-// Import your images
+// import { Link } from "react-router-dom";
 
-import hero from "../../images/hero.jpg"
-import hero2 from "../../images/hero2.jpeg"
-import hero3 from "../../images/hero3.jpg"
+// const stats = [
+//   { value: "900+", label: "Projects" },
+//   { value: "12+", label: "Years" },
+//   { value: "100%", label: "Bespoke" },
+//   { value: "3D", label: "Design" },
+// ];
 
-const Herosection = () => {
-  return (
-//     <div className="relative w-full h-[80vh] overflow-hidden">
+// export default function Herosection() {
+//   return (
+//     <section
+//       style={{
+//         background: "#1A1C19",
+//         minHeight: "92vh",
+//         display: "flex",
+//         flexDirection: "column",
+//         justifyContent: "center",
+//         position: "relative",
+//         overflow: "hidden",
+//       }}
+//     >
+//       {/* Decorative background accent */}
+//       <div
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           right: 0,
+//           width: "48%",
+//           height: "100%",
+//           background: "#2a3520",
+//           opacity: 0.4,
+//           zIndex: 0,
+//         }}
+//       />
+//       <div
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           left: 0,
+//           width: "100%",
+//           height: "100%",
+//           backgroundImage:
+//             "repeating-linear-gradient(90deg, rgba(173,185,64,0.03) 0px, rgba(173,185,64,0.03) 1px, transparent 1px, transparent 80px)",
+//           zIndex: 0,
+//         }}
+//       />
 
-//       {/* ---- Background Slider ---- */}
-//       <Swiper
-//         modules={[Autoplay, EffectFade]}
-//         autoplay={{ delay: 2000, disableOnInteraction: false }}
-//         effect="fade"
-//         loop={true}
-//         className="absolute inset-0 w-full h-[80vh] z-0"
+//       <div
+//         style={{
+//           maxWidth: 1200,
+//           margin: "0 auto",
+//           padding: "80px 48px",
+//           display: "grid",
+//           gridTemplateColumns: "1fr 1fr",
+//           gap: 64,
+//           alignItems: "center",
+//           position: "relative",
+//           zIndex: 1,
+//           width: "100%",
+//         }}
 //       >
-//         <SwiperSlide>
-//           <img src={hero} alt="slide1" className="w-full h-[80vh] object-cover" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src={hero2} alt="slide2" className="w-full h-[80vh] object-cover" />
-//         </SwiperSlide>
-//         <SwiperSlide>
-//           <img src={hero3} alt="slide3" className="w-full h-[80vh] object-cover" />
-//         </SwiperSlide>
-//       </Swiper>
+//         {/* Left — Text */}
+//         <div>
+//           <div
+//             style={{
+//               fontSize: 10,
+//               letterSpacing: 4,
+//               color: "#adb940",
+//               fontFamily: "'Raleway', sans-serif",
+//               marginBottom: 20,
+//               display: "flex",
+//               alignItems: "center",
+//               gap: 12,
+//             }}
+//           >
+//             <span style={{ display: "inline-block", width: 32, height: 1, background: "#adb940" }} />
+//             BESPOKE INTERIORS
+//           </div>
 
-//       {/* ---- Dark Overlay ---- */}
-//       <div className="absolute inset-0 bg-black/50 z-10" />
+//           <h1
+//             style={{
+//               fontFamily: "'Cinzel', serif",
+//               fontSize: "clamp(36px, 5vw, 58px)",
+//               color: "#F8F6F1",
+//               lineHeight: 1.15,
+//               fontWeight: 400,
+//               margin: "0 0 24px",
+//             }}
+//           >
+//             Build For<br />
+//             Your Spaces<br />
 
-//       {/* ---- Text & CTA Content ---- */}
-//       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+//             {/* <span style={{ color: "#adb940" }}>Define</span> You */}
+//           </h1>
 
-//         {/* Heading */}
-//         {/*md:text-[64px] font-bold leading-tight
-//                        bg-gradient-to-r from-[#3c5a25] via-[#d1c400] to-[#3c5a25]
-//                        bg-clip-text text-transparent
-//                        drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)] */}
-//         <h1 className="font-cinzel text-[48px] text-[white] drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]  ">
-//           Elevate Your Living Space
-//         </h1>
+//           <p
+//             style={{
+//               fontFamily: "'Raleway', sans-serif",
+//               fontSize: 13,
+//               color: "rgba(248,246,241,0.6)",
+//               lineHeight: 1.9,
+//               marginBottom: 40,
+//               maxWidth: 380,
+//             }}
+//           >
+//             Premium home decor &amp; bespoke interiors — kitchens, wardrobes,
+//             doors, and media walls, designed around how you live.
+//           </p>
 
-//         {/* Subheading */}
-//         <p className="font-raleway mt-4 text-[16px] md:text-[20px] text-white/90 max-w-[600px]
-//                       drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-//           Discover our curated collection of premium home decor and bespoke design services
-//         </p>
+//           <div style={{ display: "flex", gap: 14 }}>
+//             <Link
+//               to="/services"
+//               style={{
+//                 background: "#adb940",
+//                 color: "#1A1C19",
+//                 fontSize: 10,
+//                 letterSpacing: 3,
+//                 padding: "14px 28px",
+//                 textDecoration: "none",
+//                 fontFamily: "'Raleway', sans-serif",
+//                 fontWeight: 500,
+//                 display: "inline-block",
+//               }}
+//             >
+//               EXPLORE SERVICES
+//             </Link>
+//             <Link
+//               to="/services#portfolio"
+//               style={{
+//                 border: "1px solid rgba(248,246,241,0.25)",
+//                 color: "#F8F6F1",
+//                 fontSize: 10,
+//                 letterSpacing: 3,
+//                 padding: "14px 28px",
+//                 textDecoration: "none",
+//                 fontFamily: "'Raleway', sans-serif",
+//                 display: "inline-block",
+//               }}
+//             >
+//               VIEW PORTFOLIO
+//             </Link>
+//           </div>
+//         </div>
 
-//         {/* CTA Buttons */}
-//         <div className="flex gap-4 mt-8 flex-wrap justify-center">
-
-//           {/* Button 1 */}
-//           <button className="font-raleway px-8 py-3 bg-green-800 text-white text-[16px]
-//                    font-semibold rounded-sm border-2 border-green-800
-//                    hover:bg-transparent hover:text-[#d1c400] hover:border-[#d1c400]
-//                    transition-all duration-300 cursor-pointer">
-//   Shop Collection
-// </button>
-
-//           {/* Button 2 */}
-//           <button className="font-raleway px-8 py-3 bg-transparent text-white text-[16px]
-//                              font-semibold rounded-sm border-2 border-white
-//                              hover:bg-transparent hover:text-[#d1c400] hover:border-[#d1c400]
-//                              transition-all duration-300 cursor-pointer">
-//             Explore Services
-//           </button>
-
+//         {/* Right — Image */}
+//         <div
+//           style={{
+//             position: "relative",
+//             height: 480,
+//             border: "1px solid rgba(173,185,64,0.2)",
+//           }}
+//         >
+//           <img
+//             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+//             alt="Luxury interior by Ambianz"
+//             style={{
+//               width: "100%",
+//               height: "100%",
+//               objectFit: "cover",
+//               display: "block",
+//               filter: "brightness(0.85)",
+//             }}
+//           />
+//           {/* Overlay badge */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               bottom: 24,
+//               left: 24,
+//               background: "rgba(26,28,25,0.85)",
+//               border: "0.5px solid rgba(173,185,64,0.4)",
+//               padding: "12px 18px",
+//               backdropFilter: "blur(4px)",
+//             }}
+//           >
+//             <div
+//               style={{
+//                 fontFamily: "'Cinzel', serif",
+//                 color: "#adb940",
+//                 fontSize: 10,
+//                 letterSpacing: 2,
+//               }}
+//             >
+//               AMBIANZ SIGNATURE
+//             </div>
+//             <div
+//               style={{
+//                 fontFamily: "'Raleway', sans-serif",
+//                 color: "#F8F6F1",
+//                 fontSize: 11,
+//                 marginTop: 2,
+//                 opacity: 0.7,
+//               }}
+//             >
+//               Bespoke · Precision · Craft
+//             </div>
+//           </div>
 //         </div>
 //       </div>
 
-//     </div>
-<div className="relative w-full h-[100vh] overflow-hidden">
+//       {/* Stat Strip */}
+//       <div className="overflow-hidden bg-[#adb940] py-3 border-y border-black/10">
+//         <div className="flex animate-marquee whitespace-nowrap">
+//           {[...Array(3)].map((_, gi) => (
+//             <div key={gi} className="flex items-center">
+//               {["Bespoke Kitchens", "Fitted Wardrobes", "Statement Doors", "Media Walls", "Home Offices", "Cafe Fit-outs"].map((item, i) => (
+//                 <span key={i} className="inline-flex items-center gap-4 px-8 font-['Raleway'] text-[11px] tracking-[3px] uppercase text-[#1a1c19] font-medium">
+//                   <span className="w-1.5 h-1.5 bg-[#3c5a25] inline-block flex-shrink-0" />
+//                   {item}
+//                 </span>
+//               ))}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
-    <Swiper
-        modules={[Autoplay, EffectFade]}
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
-        effect="fade"
-        loop={true}
-        className="absolute inset-0 w-full h-full z-0"
+
+import { Link } from "react-router-dom";
+import heroBg from "../../images/hero2.jpeg";
+import herosection from "../../images/herosection.jpg";
+import kitchenA from "../../images/kitchenA.jpg"
+import kitchenB from "../../images/kitchenB.jpg"
+import kitchenC from "../../images/kitchenC.jpg"
+
+export default function Herosection() {
+  return (
+    <section
+      style={{
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-        <SwiperSlide>
-            <img src={hero} alt="slide1" className="w-full h-full object-cover" />
-        </SwiperSlide>
-        <SwiperSlide>
-            <img src={hero2} alt="slide2" className="w-full h-full object-cover" />
-        </SwiperSlide>
-        <SwiperSlide>
-            <img src={hero3} alt="slide3" className="w-full h-full object-cover" />
-        </SwiperSlide>
-    </Swiper>
+      {/* Full-width background image */}
+      <div
+        style={{
+          position: "relative",
+          minHeight: "92vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          background: "#1A1C19",
+        }}
+      >
+        {/* Background image */}
+        <img
+          src={kitchenC}
+          alt="Luxury interior by Ambianz"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            display: "block",
+          }}
+        />
 
-    {/* Dark Overlay */}
-    <div className="absolute inset-0 bg-black/50 z-10" />
+        {/* Dark overlay — stronger on left for text legibility, fades right */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to right, rgba(26, 28, 25, 0.48) 0%, rgba(26, 28, 25, 0.37) 20%, rgba(26,28,25,0.15) 80%)",
+            zIndex: 1,
+          }}
+        />
 
-    {/* Content */}
-    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
+        {/* Subtle grid texture overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(173,185,64,0.03) 0px, rgba(173,185,64,0.03) 1px, transparent 1px, transparent 80px)",
+            zIndex: 2,
+          }}
+        />
 
-        {/* Top label */}
-        <div className='flex items-center gap-3 mb-6'>
-            <div className='h-[1px] w-[50px] bg-[#d1c400]' />
-            <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
-                Art of Living
-            </span>
-            <div className='h-[1px] w-[50px] bg-[#d1c400]' />
+        {/* Content */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 3,
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "80px 48px",
+            width: "100%",
+          }}
+        >
+          {/* Left — Text (max ~50% width) */}
+          <div style={{ maxWidth: 520 }}>
+            <div
+              style={{
+                fontSize: 10,
+                letterSpacing: 4,
+                color: "#adb940",
+                fontFamily: "'Raleway', sans-serif",
+                marginBottom: 20,
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 32,
+                  height: 1,
+                  background: "#adb940",
+                }}
+              />
+              BESPOKE INTERIORS
+            </div>
+
+            <h1
+              style={{
+                fontFamily: "'Cinzel', serif",
+                fontSize: "clamp(36px, 5vw, 58px)",
+                color: "#F8F6F1",
+                lineHeight: 1.15,
+                fontWeight: 400,
+                margin: "0 0 24px",
+              }}
+            >
+              Build For
+              <br />
+              Your Spaces
+            </h1>
+
+            <p
+              style={{
+                fontFamily: "'Raleway', sans-serif",
+                fontSize: 13,
+                color: "rgba(248,246,241,0.6)",
+                lineHeight: 1.9,
+                marginBottom: 40,
+                maxWidth: 380,
+              }}
+            >
+              Premium home decor &amp; bespoke interiors — kitchens, wardrobes,
+              doors, and media walls, designed around how you live.
+            </p>
+
+            <div className="flex gap-4">
+              <Link
+                to="/services"
+                className="bg-[#3c5a25] text-white px-8 py-4 text-[10px] tracking-[3px] font-medium font-raleway transition-all duration-300 hover:bg-[#4a6b2e] hover:scale-105 hover:shadow-xl inline-block no-underline uppercase"
+              >
+                EXPLORE SERVICES
+              </Link>
+              <Link
+                to="/services#portfolio"
+                className="border border-white/60 text-white px-8 py-4 text-[10px] tracking-[3px] font-raleway transition-all duration-300  hover:text-white hover:scale-105 hover:shadow-xl inline-block no-underline uppercase"
+              >
+                VIEW PORTFOLIO
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Heading */}
-        <h1 className="font-cinzel text-[56px] font-bold text-white tracking-wide leading-tight
-                       drop-shadow-[0_2px_20px_rgba(0,0,0,0.8)]">
-            Elevate Your  Living Space
-            
-        </h1>
-
-        {/* Subheading */}
-        <p className="font-raleway mt-2 text-[16px] text-white/70 max-w-[520px] leading-relaxed
-                      drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            Discover our curated collection of premium home decor
-            and bespoke design services
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex gap-4 mt-10">
-            <button className="font-cinzel px-8 py-3 bg-green-800 text-white text-[13px]
-                               tracking-widest uppercase border-2 border-green-800
-                               hover:bg-transparent hover:text-[#d1c400] hover:border-[#d1c400]
-                               transition-all duration-300 cursor-pointer relative group overflow-hidden">
-                <span className='absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%]
-                                 bg-gradient-to-r from-transparent via-white/10 to-transparent
-                                 transition-all duration-500' />
-                Shop Collection
-            </button>
-
-            <button className="font-cinzel px-8 py-3 bg-transparent text-white text-[13px]
-                               tracking-widest uppercase border-2 border-transparent
-                               hover:text-[#d1c400] hover:border-[#d1c400]
-                               transition-all duration-300 cursor-pointer">
-                Explore Services →
-            </button>
+        {/* Bottom-right badge */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 32,
+            right: 48,
+            zIndex: 4,
+            background: "rgba(26,28,25,0.85)",
+            border: "0.5px solid rgba(173,185,64,0.4)",
+            padding: "12px 18px",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Cinzel', serif",
+              color: "#adb940",
+              fontSize: 10,
+              letterSpacing: 2,
+            }}
+          >
+            AMBIANZ SIGNATURE
+          </div>
+          <div
+            style={{
+              fontFamily: "'Raleway', sans-serif",
+              color: "#F8F6F1",
+              fontSize: 11,
+              marginTop: 2,
+              opacity: 0.7,
+            }}
+          >
+            Bespoke · Precision · Craft
+          </div>
         </div>
+      </div>
 
-    </div>
-</div>
-  )
+      {/* Stat Strip — unchanged */}
+      <div className="overflow-hidden bg-[#adb940] py-3 border-y border-black/10">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(3)].map((_, gi) => (
+            <div key={gi} className="flex items-center">
+              {[
+                "Bespoke Kitchens",
+                "Fitted Wardrobes",
+                "Statement Doors",
+                "Media Walls",
+                "Home Offices",
+                "Cafe Fit-outs",
+              ].map((item, i) => (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-4 px-8 font-['Raleway'] text-[11px] tracking-[3px] uppercase text-[#1a1c19] font-medium"
+                >
+                  <span className="w-1.5 h-1.5 bg-[#3c5a25] inline-block flex-shrink-0" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-
-export default Herosection

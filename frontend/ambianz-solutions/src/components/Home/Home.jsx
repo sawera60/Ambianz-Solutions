@@ -8,21 +8,32 @@ import Process from "./Process"
 import MiniServices from './Services'
 import Bottomfeature from './bottomfeature'
 import Newsletter from './Newsletter'
+import ServicesDisciplines from './ServicesDisciplines'
+import WhyAmbianz from './WhyAmbianz'
+import ShopPreview from './ShopPreview'
+import CTAStrip from './CTAStrip'
+import FeaturedProject from './FeaturedProject'
+
 
 
 
 const Home = () => {
     return (
         <>
-          
+
             <Herosection />
-            <Bestseller />
-            <Collection />
-            <MiniServices />
-            <Bottomfeature />
-            <Process />
-            <Newsletter />
-            <Footer />
+            <ServicesDisciplines />
+            {/* <Bestseller /> */}
+            {/* <Collection /> */}
+            <WhyAmbianz />
+            <FeaturedProject />
+            <ShopPreview />
+            {/* <MiniServices /> */}
+            {/* <Bottomfeature /> */}
+            <CTAStrip />
+            {/* <Process /> */}
+            {/* <Newsletter /> */}
+
 
         </>
     )

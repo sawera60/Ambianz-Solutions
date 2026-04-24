@@ -1,132 +1,425 @@
+// import React from 'react'
+
+// const GetQuote = () => {
+//     return (
+
+//         <div className='min-h-screen bg-white'>
+
+//             {/* Hero Banner */}
+//             {/* <div className='relative bg-green-900 py-16 px-10 text-center overflow-hidden'>
+//                 <div className='absolute top-0 left-0 w-[300px] h-[300px] rounded-full
+//                                 bg-yellow-600/10 blur-[100px] pointer-events-none' />
+//                 <div className='absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full
+//                                 bg-yellow-600/10 blur-[100px] pointer-events-none' />
+
+//                 <div className='flex items-center justify-center gap-3 mb-4'>
+//                     <div className='h-[1px] w-[60px] bg-gradient-to-r from-transparent to-[#d1c400]' />
+//                     <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
+//                         Free Consultation
+//                     </span>
+//                     <div className='h-[1px] w-[60px] bg-gradient-to-l from-transparent to-[#d1c400]' />
+//                 </div>
+
+//                 <h1 className='font-cinzel text-[42px] font-bold text-white leading-tight'>
+//                     Let's Create Something
+//                     <span className='block bg-gradient-to-r from-[#3c5a25] via-[#d1c400] to-[#3c5a25]
+//                                      bg-clip-text text-transparent'>
+//                         Beautiful Together
+//                     </span>
+//                 </h1>
+//                 <p className='font-raleway text-[14px] text-white/50 mt-4 max-w-[500px] mx-auto'>
+//                     Fill in the form below and our expert designers will get back
+//                     to you within 24 hours with a free 3D preview.
+//                 </p>
+//             </div> */}
+
+//              <div className='relative w-full h-[280px] overflow-hidden'>
+//                 <img
+//                     src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000"
+//                     alt="Shop Banner"
+//                     className='w-full h-full object-cover'
+//                 />
+//                 <div className='absolute inset-0 bg-black/55' />
+//                 <div className='absolute inset-0 flex flex-col items-center justify-center text-center'>
+//                     <div className='flex items-center gap-3 mb-3'>
+//                         <div className='h-[1px] w-[40px] bg-[#d1c400]' />
+//                         <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
+//                             Browse
+//                         </span>
+//                         <div className='h-[1px] w-[40px] bg-[#d1c400]' />
+//                     </div>
+//                     <h1 className='font-cinzel text-[36px] font-bold text-white'>
+//                        Let's Create Something Beautiful Together
+//                     </h1>
+//                     {/* <p className='font-raleway text-[13px] text-white/60 mt-2'>
+//                         Curated for premium living
+//                     </p> */}
+//                     <p className='font-raleway text-[14px] text-white/50 mt-4 max-w-[500px] mx-auto'>
+//                     Fill in the form below and our expert designers will get back
+//                     to you within 24 hours with a free 3D preview.
+//                 </p>
+//                 </div>
+//             </div>
+
+//             {/* Steps Progress Bar */}
+//             <div className='flex items-center justify-center gap-0 py-10 px-10
+//                             border-b border-gray-100'>
+//                 {[
+//                     { number: "01", label: "Choose Service" },
+//                     { number: "02", label: "Your Details" },
+//                     { number: "03", label: "Project Details" },
+//                     { number: "04", label: "Submit" },
+//                 ].map((step, index) => (
+//                     <div key={index} className='flex items-center'>
+//                         <div className='flex flex-col items-center gap-2'>
+//                             <div className={`w-[44px] h-[44px] flex items-center justify-center
+//                                             border-2 font-cinzel text-[13px] font-bold
+//                                             ${index === 0
+//                                     ? 'border-[#d1c400] text-[#d1c400] bg-[#d1c400]/10'
+//                                     : 'border-gray-300 text-gray-500'
+//                                 }`}>
+//                                 {step.number}
+//                             </div>
+//                             <span className={`font-raleway text-[11px] tracking-widest uppercase
+//                                              ${index === 0 ? 'text-[#d1c400]' : 'text-gray-500'}`}>
+//                                 {step.label}
+//                             </span>
+//                         </div>
+//                         {index < 3 && (
+//                             <div className='w-[100px] h-[1px] bg-gray-200 mb-6 mx-2' />
+//                         )}
+//                     </div>
+//                 ))}
+//             </div>
+
+//             {/* Form Area */}
+//             <div className=' max-w-[750px]  mx-auto py-14 px-6 '>
+
+//                 {/* Step 1 — Choose Service */}
+//                 <div className='mb-12'>
+//                     <div className='flex items-center gap-3 mb-6'>
+//                         <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>01</span>
+//                         <div>
+//                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+//                                 Which Service Are You Interested In?
+//                             </h3>
+//                             <p className='font-raleway text-[13px] text-gray-400'>
+//                                 Select one or more services
+//                             </p>
+//                         </div>
+//                     </div>
+
+//                     <div className='grid grid-cols-2 gap-4'>
+//                         {[
+//                             { icon: "🍳", label: "Bespoke Kitchen", desc: "Modern kitchen design & installation" },
+//                             { icon: "🚪", label: "Designer Doors", desc: "Custom doors for every entrance" },
+//                             { icon: "🪞", label: "Bespoke Wardrobe", desc: "Tailored storage solutions" },
+//                             { icon: "📺", label: "Media Wall", desc: "Stunning entertainment focal points" },
+//                         ].map((service, index) => (
+//                             <div key={index}
+//                                 className='flex items-center gap-4 p-5 border-2 border-gray-100
+//                                             hover:border-[#d1c400] cursor-pointer
+//                                             transition-all duration-300 group'>
+//                                 <span className='text-[28px]'>{service.icon}</span>
+//                                 <div>
+//                                     <h4 className='font-cinzel text-[14px] font-semibold text-gray-800
+//                                                    group-hover:text-[#d1c400] transition-all duration-300'>
+//                                         {service.label}
+//                                     </h4>
+//                                     <p className='font-raleway text-[12px] text-gray-400'>
+//                                         {service.desc}
+//                                     </p>
+//                                 </div>
+//                             </div>
+//                         ))}
+//                     </div>
+//                 </div>
+
+//                 {/* Divider */}
+//                 <div className='h-[1px] bg-gray-100 mb-12' />
+
+//                 {/* Step 2 — Your Details */}
+//                 <div className='mb-12'>
+//                     <div className='flex items-center gap-3 mb-6'>
+//                         <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>02</span>
+//                         <div>
+//                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+//                                 Your Details
+//                             </h3>
+//                             <p className='font-raleway text-[13px] text-gray-400'>
+//                                 How can we reach you?
+//                             </p>
+//                         </div>
+//                     </div>
+
+//                     <div className='flex flex-col gap-4'>
+//                         <div className='flex gap-4'>
+//                             <div className='flex flex-col gap-2 w-full'>
+//                                 <label className='font-raleway text-[12px] text-gray-400
+//                                                   tracking-widest '>
+//                                     Full Name *
+//                                 </label>
+//                                 <input
+//                                     type="text"
+//                                     placeholder='John Doe'
+//                                     className='font-raleway text-[14px] text-gray-700
+//                                                border-2 border-gray-100 px-4 py-3 outline-none
+//                                                focus:border-[#d1c400] transition-all duration-300
+//                                                placeholder:text-gray-300'
+//                                 />
+//                             </div>
+//                             <div className='flex flex-col gap-2 w-full'>
+//                                 <label className='font-raleway text-[12px] text-gray-400
+//                                                   tracking-widest'>
+//                                     Phone Number *
+//                                 </label>
+//                                 <input
+//                                     type="text"
+//                                     placeholder='+92 300 0000000'
+//                                     className='font-raleway text-[14px] text-gray-700
+//                                                border-2 border-gray-100 px-4 py-3 outline-none
+//                                                focus:border-[#d1c400] transition-all duration-300
+//                                                placeholder:text-gray-300'
+//                                 />
+//                             </div>
+//                         </div>
+//                         <div className='flex flex-col gap-2'>
+//                             <label className='font-raleway text-[12px] text-gray-400
+//                                               tracking-widest '>
+//                                 Email Address *
+//                             </label>
+//                             <input
+//                                 type="email"
+//                                 placeholder='john@example.com'
+//                                 className='font-raleway text-[14px] text-gray-700
+//                                            border-2 border-gray-100 px-4 py-3 outline-none
+//                                            focus:border-[#d1c400] transition-all duration-300
+//                                            placeholder:text-gray-300'
+//                             />
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* Divider */}
+//                 <div className='h-[1px] bg-gray-200 mb-12' />
+
+//                 {/* Step 3 — Project Details */}
+//                 <div className='mb-12'>
+//                     <div className='flex items-center gap-3 mb-6'>
+//                         <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>03</span>
+//                         <div>
+//                             <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+//                                 Project Details
+//                             </h3>
+//                             <p className='font-raleway text-[13px] text-gray-400'>
+//                                 Tell us more about your project
+//                             </p>
+//                         </div>
+//                     </div>
+
+//                     <div className='flex flex-col gap-4'>
+//                         <div className='flex gap-4'>
+
+//                             {/* Budget */}
+//                             <div className='flex flex-col gap-2 w-full'>
+//                                 <label className='font-raleway text-[12px] text-gray-400
+//                                                   tracking-widest'>
+//                                     Budget Range *
+//                                 </label>
+//                                 <select className='font-raleway text-[14px] text-gray-400
+//                                                    border-2 border-gray-100 px-4 py-3 outline-none
+//                                                    focus:border-[#d1c400] transition-all duration-300
+//                                                    bg-white cursor-pointer'>
+//                                     <option value="">Select budget</option>
+//                                     <option>Rs. 50,000 - 1,00,000</option>
+//                                     <option>Rs. 1,00,000 - 3,00,000</option>
+//                                     <option>Rs. 3,00,000 - 5,00,000</option>
+//                                     <option>Rs. 5,00,000 - 10,00,000</option>
+//                                     <option>Rs. 10,00,000+</option>
+//                                 </select>
+//                             </div>
+
+//                             {/* Timeline */}
+//                             <div className='flex flex-col gap-2 w-full'>
+//                                 <label className='font-raleway text-[12px] text-gray-400
+//                                                   tracking-widest '>
+//                                     Timeline *
+//                                 </label>
+//                                 <select className='font-raleway text-[14px] text-gray-400
+//                                                    border-2 border-gray-100 px-4 py-3 outline-none
+//                                                    focus:border-[#d1c400] transition-all duration-300
+//                                                    bg-white cursor-pointer'>
+//                                     <option value="">Select timeline</option>
+//                                     <option>As soon as possible</option>
+//                                     <option>Within 1 month</option>
+//                                     <option>1 - 3 months</option>
+//                                     <option>3 - 6 months</option>
+//                                     <option>Just exploring</option>
+//                                 </select>
+//                             </div>
+//                         </div>
+
+//                         {/* Location */}
+//                         <div className='flex flex-col gap-2'>
+//                             <label className='font-raleway text-[12px] text-gray-400
+//                                               tracking-widest '>
+//                                 Your Location *
+//                             </label>
+//                             <input
+//                                 type="text"
+//                                 placeholder='e.g. Lahore, Karachi, Islamabad...'
+//                                 className='font-raleway text-[14px] text-gray-700
+//                                            border-2 border-gray-100 px-4 py-3 outline-none
+//                                            focus:border-[#d1c400] transition-all duration-300
+//                                            placeholder:text-gray-300'
+//                             />
+//                         </div>
+
+//                         {/* Message */}
+//                         <div className='flex flex-col gap-2'>
+//                             <label className='font-raleway text-[12px] text-gray-400
+//                                               tracking-widest '>
+//                                 Additional Notes
+//                             </label>
+//                             <textarea
+//                                 rows={4}
+//                                 placeholder='Tell us anything else about your project...'
+//                                 className='font-raleway text-[14px] text-gray-700
+//                                            border-2 border-gray-100 px-4 py-3 outline-none
+//                                            focus:border-[#d1c400] transition-all duration-300
+//                                            placeholder:text-gray-300 resize-none'
+//                             />
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* Divider */}
+//                 <div className='h-[1px] bg-gray-100 mb-12' />
+
+//                 {/* Step 4 — Submit */}
+//                 <div className='flex flex-col items-center gap-4 text-center'>
+//                     <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>04</span>
+//                     <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+//                         Ready to Transform Your Space?
+//                     </h3>
+//                     <p className='font-raleway text-[13px] text-gray-400 max-w-[400px]'>
+//                         We'll review your request and get back to you within
+//                         <span className='text-[#d1c400] font-semibold'> 24 hours </span>
+//                         with a free 3D preview proposal.
+//                     </p>
+
+//                     <button className='font-cinzel mt-4 px-14 py-4 bg-green-800 text-white
+//                                        text-[14px] tracking-widest uppercase border-2 border-green-800
+//                                        hover:bg-transparent hover:text-[#d1c400] hover:border-[#d1c400]
+//                                        transition-all duration-300 cursor-pointer relative group
+//                                        overflow-hidden'>
+//                         <span className='absolute inset-0 translate-x-[-100%]
+//                                          group-hover:translate-x-[100%]
+//                                          bg-gradient-to-r from-transparent via-white/10 to-transparent
+//                                          transition-all duration-500' />
+//                         Submit Request
+//                     </button>
+
+
+//                 </div>
+
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default GetQuote
+
 import React from 'react'
 
 const GetQuote = () => {
     return (
+        <div className='w-full bg-[#F8F6F1]'>
 
-        <div className='min-h-screen bg-white'>
-
-            {/* Hero Banner */}
-            {/* <div className='relative bg-green-900 py-16 px-10 text-center overflow-hidden'>
-                <div className='absolute top-0 left-0 w-[300px] h-[300px] rounded-full
-                                bg-yellow-600/10 blur-[100px] pointer-events-none' />
-                <div className='absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full
-                                bg-yellow-600/10 blur-[100px] pointer-events-none' />
-
-                <div className='flex items-center justify-center gap-3 mb-4'>
-                    <div className='h-[1px] w-[60px] bg-gradient-to-r from-transparent to-[#d1c400]' />
-                    <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
-                        Free Consultation
-                    </span>
-                    <div className='h-[1px] w-[60px] bg-gradient-to-l from-transparent to-[#d1c400]' />
-                </div>
-
-                <h1 className='font-cinzel text-[42px] font-bold text-white leading-tight'>
-                    Let's Create Something
-                    <span className='block bg-gradient-to-r from-[#3c5a25] via-[#d1c400] to-[#3c5a25]
-                                     bg-clip-text text-transparent'>
-                        Beautiful Together
-                    </span>
-                </h1>
-                <p className='font-raleway text-[14px] text-white/50 mt-4 max-w-[500px] mx-auto'>
-                    Fill in the form below and our expert designers will get back
-                    to you within 24 hours with a free 3D preview.
+            {/* ── TOP INTRO BAND (replaces hero) ── */}
+            <div className='w-full bg-white border-t border-[#e0ddd7] py-16 px-10 text-center'>
+                <p className='font-raleway text-[10px] tracking-[5px] uppercase text-[#adb940] mb-4'>
+                    Start Your Project
                 </p>
-            </div> */}
-           
-             <div className='relative w-full h-[280px] overflow-hidden'>
-                <img
-                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000"
-                    alt="Shop Banner"
-                    className='w-full h-full object-cover'
-                />
-                <div className='absolute inset-0 bg-black/55' />
-                <div className='absolute inset-0 flex flex-col items-center justify-center text-center'>
-                    <div className='flex items-center gap-3 mb-3'>
-                        <div className='h-[1px] w-[40px] bg-[#d1c400]' />
-                        <span className='font-raleway text-[11px] text-[#d1c400] tracking-[4px] uppercase'>
-                            Browse
-                        </span>
-                        <div className='h-[1px] w-[40px] bg-[#d1c400]' />
-                    </div>
-                    <h1 className='font-cinzel text-[36px] font-bold text-white'>
-                       Let's Create Something Beautiful Together
-                    </h1>
-                    {/* <p className='font-raleway text-[13px] text-white/60 mt-2'>
-                        Curated for premium living
-                    </p> */}
-                    <p className='font-raleway text-[14px] text-white/50 mt-4 max-w-[500px] mx-auto'>
-                    Fill in the form below and our expert designers will get back
-                    to you within 24 hours with a free 3D preview.
+                <div className='h-[1px] w-9 bg-[#d1c400] mx-auto mb-5' />
+                <h2 className='font-cinzel text-[clamp(28px,3.5vw,46px)] font-semibold text-[#1A1C19] leading-[1.08] mb-5'>
+                    Ready to Transform<br />Your Space?
+                </h2>
+                <p className='font-raleway text-[13px] text-[#888] max-w-[440px] mx-auto leading-relaxed'>
+                    Fill in the form below and our designers will respond within
+                    <span className='text-[#adb940] font-medium'> 24 hours </span>
+                    with a personalised proposal and free 3D preview.
                 </p>
-                </div>
             </div>
 
-            {/* Steps Progress Bar */}
-            <div className='flex items-center justify-center gap-0 py-10 px-10
-                            border-b border-gray-100'>
+            {/* ── STEP INDICATOR ── */}
+            <div className='flex items-center justify-center gap-0 py-9 px-10 border-b border-[#e0ddd7] bg-white'>
                 {[
-                    { number: "01", label: "Choose Service" },
-                    { number: "02", label: "Your Details" },
-                    { number: "03", label: "Project Details" },
-                    { number: "04", label: "Submit" },
+                    { number: '01', label: 'Choose Service' },
+                    { number: '02', label: 'Your Details' },
+                    { number: '03', label: 'Project Details' },
+                    { number: '04', label: 'Submit' },
                 ].map((step, index) => (
                     <div key={index} className='flex items-center'>
                         <div className='flex flex-col items-center gap-2'>
-                            <div className={`w-[44px] h-[44px] flex items-center justify-center
-                                            border-2 font-cinzel text-[13px] font-bold
-                                            ${index === 0
-                                    ? 'border-[#d1c400] text-[#d1c400] bg-[#d1c400]/10'
-                                    : 'border-gray-300 text-gray-500'
+                            <div className={`w-[40px] h-[40px] flex items-center justify-center
+                                font-cinzel text-[12px] font-semibold
+                                ${index === 0
+                                    ? 'border border-[#d1c400] text-[#d1c400] bg-[#d1c400]/5'
+                                    : 'border border-[#e0ddd7] text-[#ccc]'
                                 }`}>
                                 {step.number}
                             </div>
-                            <span className={`font-raleway text-[11px] tracking-widest uppercase
-                                             ${index === 0 ? 'text-[#d1c400]' : 'text-gray-500'}`}>
+                            <span className={`font-raleway text-[9px] tracking-[2.5px] uppercase whitespace-nowrap
+                                ${index === 0 ? 'text-[#adb940]' : 'text-[#ccc]'}`}>
                                 {step.label}
                             </span>
                         </div>
                         {index < 3 && (
-                            <div className='w-[100px] h-[1px] bg-gray-200 mb-6 mx-2' />
+                            <div className='w-[80px] h-[0.5px] bg-[#e0ddd7] mb-6 mx-2' />
                         )}
                     </div>
                 ))}
             </div>
 
-            {/* Form Area */}
-            <div className=' max-w-[750px]  mx-auto py-14 px-6 '>
+            {/* ── FORM AREA ── */}
+            <div className='max-w-[750px] mx-auto py-16 px-6'>
 
                 {/* Step 1 — Choose Service */}
-                <div className='mb-12'>
-                    <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>01</span>
+                <div className='mb-14'>
+                    <div className='flex items-baseline gap-5 mb-8'>
+                        <span className='font-cinzel text-[48px] font-semibold text-[#d1c400]/20 leading-none'>01</span>
                         <div>
-                            <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+                            <h3 className='font-cinzel text-[19px] font-semibold text-[#1A1C19]'>
                                 Which Service Are You Interested In?
                             </h3>
-                            <p className='font-raleway text-[13px] text-gray-400'>
+                            <p className='font-raleway text-[12px] text-[#999] mt-1'>
                                 Select one or more services
                             </p>
                         </div>
                     </div>
 
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-3'>
                         {[
-                            { icon: "🍳", label: "Bespoke Kitchen", desc: "Modern kitchen design & installation" },
-                            { icon: "🚪", label: "Designer Doors", desc: "Custom doors for every entrance" },
-                            { icon: "🪞", label: "Bespoke Wardrobe", desc: "Tailored storage solutions" },
-                            { icon: "📺", label: "Media Wall", desc: "Stunning entertainment focal points" },
+                            { num: '01', label: 'Bespoke Kitchen', desc: 'Custom kitchen design & installation' },
+                            { num: '02', label: 'Designer Doors', desc: 'Architectural doors for every entrance' },
+                            { num: '03', label: 'Bespoke Wardrobe', desc: 'Precision-engineered storage solutions' },
+                            { num: '04', label: 'Media Wall', desc: 'Cinematic entertainment focal points' },
                         ].map((service, index) => (
                             <div key={index}
-                                className='flex items-center gap-4 p-5 border-2 border-gray-100
-                                            hover:border-[#d1c400] cursor-pointer
-                                            transition-all duration-300 group'>
-                                <span className='text-[28px]'>{service.icon}</span>
+                                className='flex items-center gap-4 p-5 border border-[#e0ddd7] bg-white
+                                           hover:border-[#d1c400] cursor-pointer transition-all duration-300 group'>
+                                <span className='font-cinzel text-[12px] font-semibold text-[#d1c400]/40
+                                                 group-hover:text-[#d1c400] transition-all duration-300 shrink-0'>
+                                    {service.num}
+                                </span>
+                                <div className='h-6 w-[0.5px] bg-[#e0ddd7] group-hover:bg-[#d1c400] transition-all duration-300 shrink-0' />
                                 <div>
-                                    <h4 className='font-cinzel text-[14px] font-semibold text-gray-800
-                                                   group-hover:text-[#d1c400] transition-all duration-300'>
+                                    <h4 className='font-cinzel text-[13px] font-medium text-[#1A1C19]
+                                                   group-hover:text-[#3c5a25] transition-all duration-300'>
                                         {service.label}
                                     </h4>
-                                    <p className='font-raleway text-[12px] text-gray-400'>
+                                    <p className='font-raleway text-[11px] text-[#aaa] mt-[2px]'>
                                         {service.desc}
                                     </p>
                                 </div>
@@ -136,17 +429,17 @@ const GetQuote = () => {
                 </div>
 
                 {/* Divider */}
-                <div className='h-[1px] bg-gray-100 mb-12' />
+                <div className='h-[0.5px] bg-[#e0ddd7] mb-14' />
 
                 {/* Step 2 — Your Details */}
-                <div className='mb-12'>
-                    <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>02</span>
+                <div className='mb-14'>
+                    <div className='flex items-baseline gap-5 mb-8'>
+                        <span className='font-cinzel text-[48px] font-semibold text-[#d1c400]/20 leading-none'>02</span>
                         <div>
-                            <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+                            <h3 className='font-cinzel text-[19px] font-semibold text-[#1A1C19]'>
                                 Your Details
                             </h3>
-                            <p className='font-raleway text-[13px] text-gray-400'>
+                            <p className='font-raleway text-[12px] text-[#999] mt-1'>
                                 How can we reach you?
                             </p>
                         </div>
@@ -155,63 +448,60 @@ const GetQuote = () => {
                     <div className='flex flex-col gap-4'>
                         <div className='flex gap-4'>
                             <div className='flex flex-col gap-2 w-full'>
-                                <label className='font-raleway text-[12px] text-gray-400
-                                                  tracking-widest uppercase'>
+                                <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                     Full Name *
                                 </label>
                                 <input
                                     type="text"
                                     placeholder='John Doe'
-                                    className='font-raleway text-[14px] text-gray-700
-                                               border-2 border-gray-100 px-4 py-3 outline-none
+                                    className='font-raleway text-[13px] text-[#1A1C19]
+                                               border border-[#e0ddd7] bg-white px-4 py-3 outline-none
                                                focus:border-[#d1c400] transition-all duration-300
-                                               placeholder:text-gray-300'
+                                               placeholder:text-[#ccc]'
                                 />
                             </div>
                             <div className='flex flex-col gap-2 w-full'>
-                                <label className='font-raleway text-[12px] text-gray-400
-                                                  tracking-widest uppercase'>
+                                <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                     Phone Number *
                                 </label>
                                 <input
                                     type="text"
                                     placeholder='+92 300 0000000'
-                                    className='font-raleway text-[14px] text-gray-700
-                                               border-2 border-gray-100 px-4 py-3 outline-none
+                                    className='font-raleway text-[13px] text-[#1A1C19]
+                                               border border-[#e0ddd7] bg-white px-4 py-3 outline-none
                                                focus:border-[#d1c400] transition-all duration-300
-                                               placeholder:text-gray-300'
+                                               placeholder:text-[#ccc]'
                                 />
                             </div>
                         </div>
                         <div className='flex flex-col gap-2'>
-                            <label className='font-raleway text-[12px] text-gray-400
-                                              tracking-widest uppercase'>
+                            <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                 Email Address *
                             </label>
                             <input
                                 type="email"
                                 placeholder='john@example.com'
-                                className='font-raleway text-[14px] text-gray-700
-                                           border-2 border-gray-100 px-4 py-3 outline-none
+                                className='font-raleway text-[13px] text-[#1A1C19]
+                                           border border-[#e0ddd7] bg-white px-4 py-3 outline-none
                                            focus:border-[#d1c400] transition-all duration-300
-                                           placeholder:text-gray-300'
+                                           placeholder:text-[#ccc]'
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* Divider */}
-                <div className='h-[1px] bg-gray-200 mb-12' />
+                <div className='h-[0.5px] bg-[#e0ddd7] mb-14' />
 
                 {/* Step 3 — Project Details */}
-                <div className='mb-12'>
-                    <div className='flex items-center gap-3 mb-6'>
-                        <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>03</span>
+                <div className='mb-14'>
+                    <div className='flex items-baseline gap-5 mb-8'>
+                        <span className='font-cinzel text-[48px] font-semibold text-[#d1c400]/20 leading-none'>03</span>
                         <div>
-                            <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+                            <h3 className='font-cinzel text-[19px] font-semibold text-[#1A1C19]'>
                                 Project Details
                             </h3>
-                            <p className='font-raleway text-[13px] text-gray-400'>
+                            <p className='font-raleway text-[12px] text-[#999] mt-1'>
                                 Tell us more about your project
                             </p>
                         </div>
@@ -219,109 +509,94 @@ const GetQuote = () => {
 
                     <div className='flex flex-col gap-4'>
                         <div className='flex gap-4'>
-
-                            {/* Budget */}
                             <div className='flex flex-col gap-2 w-full'>
-                                <label className='font-raleway text-[12px] text-gray-400
-                                                  tracking-widest uppercase'>
+                                <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                     Budget Range *
                                 </label>
-                                <select className='font-raleway text-[14px] text-gray-400
-                                                   border-2 border-gray-100 px-4 py-3 outline-none
-                                                   focus:border-[#d1c400] transition-all duration-300
-                                                   bg-white cursor-pointer'>
-                                    <option value="">Select budget</option>
-                                    <option>Rs. 50,000 - 1,00,000</option>
-                                    <option>Rs. 1,00,000 - 3,00,000</option>
-                                    <option>Rs. 3,00,000 - 5,00,000</option>
-                                    <option>Rs. 5,00,000 - 10,00,000</option>
+                                <select className='font-raleway text-[13px] text-[#666]
+                                                   border border-[#e0ddd7] bg-white px-4 py-3 outline-none
+                                                   focus:border-[#d1c400] transition-all duration-300 cursor-pointer'>
+                                    <option value=''>Select budget</option>
+                                    <option>Rs. 50,000 – 1,00,000</option>
+                                    <option>Rs. 1,00,000 – 3,00,000</option>
+                                    <option>Rs. 3,00,000 – 5,00,000</option>
+                                    <option>Rs. 5,00,000 – 10,00,000</option>
                                     <option>Rs. 10,00,000+</option>
                                 </select>
                             </div>
-
-                            {/* Timeline */}
                             <div className='flex flex-col gap-2 w-full'>
-                                <label className='font-raleway text-[12px] text-gray-400
-                                                  tracking-widest uppercase'>
+                                <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                     Timeline *
                                 </label>
-                                <select className='font-raleway text-[14px] text-gray-400
-                                                   border-2 border-gray-100 px-4 py-3 outline-none
-                                                   focus:border-[#d1c400] transition-all duration-300
-                                                   bg-white cursor-pointer'>
-                                    <option value="">Select timeline</option>
+                                <select className='font-raleway text-[13px] text-[#666]
+                                                   border border-[#e0ddd7] bg-white px-4 py-3 outline-none
+                                                   focus:border-[#d1c400] transition-all duration-300 cursor-pointer'>
+                                    <option value=''>Select timeline</option>
                                     <option>As soon as possible</option>
                                     <option>Within 1 month</option>
-                                    <option>1 - 3 months</option>
-                                    <option>3 - 6 months</option>
+                                    <option>1 – 3 months</option>
+                                    <option>3 – 6 months</option>
                                     <option>Just exploring</option>
                                 </select>
                             </div>
                         </div>
 
-                        {/* Location */}
                         <div className='flex flex-col gap-2'>
-                            <label className='font-raleway text-[12px] text-gray-400
-                                              tracking-widest uppercase'>
+                            <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                 Your Location *
                             </label>
                             <input
                                 type="text"
                                 placeholder='e.g. Lahore, Karachi, Islamabad...'
-                                className='font-raleway text-[14px] text-gray-700
-                                           border-2 border-gray-100 px-4 py-3 outline-none
+                                className='font-raleway text-[13px] text-[#1A1C19]
+                                           border border-[#e0ddd7] bg-white px-4 py-3 outline-none
                                            focus:border-[#d1c400] transition-all duration-300
-                                           placeholder:text-gray-300'
+                                           placeholder:text-[#ccc]'
                             />
                         </div>
 
-                        {/* Message */}
                         <div className='flex flex-col gap-2'>
-                            <label className='font-raleway text-[12px] text-gray-400
-                                              tracking-widest uppercase'>
+                            <label className='font-raleway text-[9px] text-[#999] tracking-[3px] uppercase'>
                                 Additional Notes
                             </label>
                             <textarea
                                 rows={4}
                                 placeholder='Tell us anything else about your project...'
-                                className='font-raleway text-[14px] text-gray-700
-                                           border-2 border-gray-100 px-4 py-3 outline-none
+                                className='font-raleway text-[13px] text-[#1A1C19]
+                                           border border-[#e0ddd7] bg-white px-4 py-3 outline-none
                                            focus:border-[#d1c400] transition-all duration-300
-                                           placeholder:text-gray-300 resize-none'
+                                           placeholder:text-[#ccc] resize-none'
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* Divider */}
-                <div className='h-[1px] bg-gray-100 mb-12' />
+                <div className='h-[0.5px] bg-[#e0ddd7] mb-14' />
 
                 {/* Step 4 — Submit */}
-                <div className='flex flex-col items-center gap-4 text-center'>
-                    <span className='font-cinzel text-[32px] font-bold text-[#d1c400]'>04</span>
-                    <h3 className='font-cinzel text-[20px] font-bold text-green-900'>
+                <div className='flex flex-col items-center gap-0 text-center'>
+                    <span className='font-cinzel text-[48px] font-semibold text-[#d1c400]/20 leading-none mb-5'>04</span>
+                    <h3 className='font-cinzel text-[20px] font-semibold text-[#1A1C19] mb-3'>
                         Ready to Transform Your Space?
                     </h3>
-                    <p className='font-raleway text-[13px] text-gray-400 max-w-[400px]'>
-                        We'll review your request and get back to you within
-                        <span className='text-[#d1c400] font-semibold'> 24 hours </span>
-                        with a free 3D preview proposal.
+                    <div className='h-[1px] w-9 bg-[#d1c400] mb-5' />
+                    <p className='font-raleway text-[13px] text-[#888] max-w-[400px] leading-relaxed mb-8'>
+                        We'll review your request and respond within
+                        <span className='text-[#adb940] font-medium'> 24 hours </span>
+                        with a personalised 3D preview proposal.
                     </p>
 
-                    <button className='font-cinzel mt-4 px-14 py-4 bg-green-800 text-white
-                                       text-[14px] tracking-widest uppercase border-2 border-green-800
-                                       hover:bg-transparent hover:text-[#d1c400] hover:border-[#d1c400]
-                                       transition-all duration-300 cursor-pointer relative group
-                                       overflow-hidden'>
-                        <span className='absolute inset-0 translate-x-[-100%]
-                                         group-hover:translate-x-[100%]
-                                         bg-gradient-to-r from-transparent via-white/10 to-transparent
-                                         transition-all duration-500' />
+                    <button className='font-raleway text-[10px] tracking-[4px] uppercase font-semibold
+                                       px-14 py-[18px] bg-[#1A1C19] text-[#F8F6F1]
+                                       border border-[#1A1C19] cursor-pointer
+                                       hover:bg-transparent hover:text-[#1A1C19]
+                                       transition-all duration-300'>
                         Submit Request
                     </button>
 
-                    <p className='font-raleway text-[11px] text-gray-300 tracking-widest'>
-                        FREE CONSULTATION · NO COMMITMENT · 3D PREVIEW INCLUDED
+                    <p className='font-raleway text-[9px] tracking-[2.5px] uppercase text-[#ccc] mt-5'>
+                        No commitment required
                     </p>
                 </div>
 

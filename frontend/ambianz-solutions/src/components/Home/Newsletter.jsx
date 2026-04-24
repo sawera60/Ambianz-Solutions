@@ -1,5 +1,6 @@
 import React from 'react'
 import { MdEmail } from "react-icons/md"
+import { BsTelephone } from "react-icons/bs"
 
 const Newsletter = () => {
     return (
@@ -16,13 +17,13 @@ const Newsletter = () => {
                             bg-gradient-to-r from-transparent via-[#d1c400] to-transparent' /> */}
 
             {/* Content */}
-            <div className='relative z-10 flex flex-col items-center text-center gap-5
-                            max-w-[580px] mx-auto'>
+            <div className='relative z-10 flex flex-col items-center text-center gap-4
+                            max-w-[680px] mx-auto'>
 
                 {/* Icon */}
-                <div className='w-[50px] h-[45px] border-2 border-[#d1c400]/40
+                <div className='w-[45px] h-[40px] border-2 border-[#d1c400]/40
                                 flex items-center justify-center'>
-                    <MdEmail className='text-[24px] text-[#d1c400]' />
+                    <MdEmail className='text-[20px] text-[#d1c400]' />
                 </div>
 
                 {/* Label */}
@@ -35,40 +36,52 @@ const Newsletter = () => {
                 </div>
 
                 {/* Heading */}
-                <h2 className='font-cinzel text-[28px] text-bold text-gray-800 leading-tight'>
-                    Join Newsletter
+                <h2 className='font-cinzel text-[26px] font-bold text-gray-800 leading-tight'>
+                    Stay in the Loop
                 </h2>
 
                 {/* Subtext */}
-                <p className='font-raleway text-[13px] text-gray-600 leading-relaxed'>
+                <p className='font-raleway text-[13px] text-gray-400 leading-relaxed'>
                     Get exclusive access to new collections, design inspiration and
-                    special offers straight to your inbox.
+                    special offers — straight to your inbox or phone.
                 </p>
 
-                {/* Input + Button */}
-                <div className='flex w-full mt-2 border-2
-                                hover:border-[#d1c400]/40 transition-all duration-300'>
-                    <div className='flex items-center gap-3 flex-1 bg-white/5 px-4'>
-                        <MdEmail className='text-[16px] text-[#d1c400] shrink-0' />
+                {/* Inputs — Side by Side */}
+                <div className='flex gap-3 w-full mt-1'>
+
+                    {/* Email */}
+                    <div className='flex items-center gap-2 flex-1 border border-gray-200
+                                    hover:border-[#d1c400]/40 transition-all duration-300 px-3'>
+                        <MdEmail className='text-[14px] text-[#d1c400] shrink-0' />
                         <input
                             type="email"
-                            placeholder='Enter your email address'
+                            placeholder='Email address'
                             className='bg-transparent font-raleway text-[12px]
-                                       placeholder:text-gray-800 outline-none w-full py-4'
+                                       placeholder:text-gray-400 outline-none w-full py-2.5'
                         />
                     </div>
-                    <button className='font-cinzel px-4 py-2 bg-green-800 text-white
+
+                    {/* Phone */}
+                    <div className='flex items-center gap-2 flex-1 border border-gray-200
+                                    hover:border-[#d1c400]/40 transition-all duration-300 px-3'>
+                        <BsTelephone className='text-[12px] text-[#d1c400] shrink-0' />
+                        <input
+                            type="tel"
+                            placeholder='Phone number'
+                            className='bg-transparent font-raleway text-[12px]
+                                       placeholder:text-gray-400 outline-none w-full py-2.5'
+                        />
+                    </div>
+
+                    {/* Subscribe Button */}
+                    <button className='font-cinzel px-5 py-2.5 bg-green-800 text-white
                                        text-[10px] tracking-widest uppercase shrink-0
-                                       hover:bg-white hover:text-[#d1c400]
+                                       hover:bg-transparent hover:text-[#d1c400]
+                                       hover:border-[#d1c400] border border-green-800
                                        transition-all duration-300 cursor-pointer'>
                         Subscribe
                     </button>
                 </div>
-
-                {/* Trust line */}
-                {/* <p className='font-raleway text-[11px] text-gray-800 tracking-widest'>
-                    NO SPAM · UNSUBSCRIBE ANYTIME · EXCLUSIVE MEMBERS ONLY
-                </p> */}
 
             </div>
 

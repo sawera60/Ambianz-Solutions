@@ -271,7 +271,7 @@ const Bottomfeature = () => {
 
             <div className='py-16 px-10 relative overflow-hidden'>
 
-              
+
 
                 {/* Heading */}
                 <div className='text-center mb-14'>
@@ -296,7 +296,7 @@ const Bottomfeature = () => {
                 <div className='grid grid-cols-4 gap-6'>
                     {features.map((feature, index) => (
                         <div key={index}
-                             className='group flex flex-col gap-5 p-8
+                            className='group flex flex-col gap-4 p-6
                                         bg-white border border-gray-300
                                         hover:border-[#d1c400]/50 hover:shadow-xl
                                         transition-all duration-500 cursor-default
@@ -313,7 +313,7 @@ const Bottomfeature = () => {
                                             transition-all duration-300' />
 
                             {/* Number — now visible */}
-                            <span className='absolute top-4 right-5 font-cinzel text-[44px]
+                            <span className='absolute top-3 right-4 font-cinzel text-[36px]
                                              font-bold text-gray-300
                                              group-hover:text-[#d1c400]/20
                                              transition-all duration-300
@@ -322,7 +322,7 @@ const Bottomfeature = () => {
                             </span>
 
                             {/* Icon box */}
-                            <div className='w-[65px] h-[65px] flex items-center justify-center
+                            <div className='w-[55px] h-[55px] flex items-center justify-center
                                             border-2 border-gray-200
                                             group-hover:border-[#d1c400]
                                             bg-gray-50 group-hover:bg-white
@@ -351,7 +351,7 @@ const Bottomfeature = () => {
                     ))}
                 </div>
 
-               
+
 
             </div>
 
