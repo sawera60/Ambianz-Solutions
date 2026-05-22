@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import Herosections from "./components/Herosections";
 import axios from "axios";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import ProductModal from "./components/ProductModal";
+import { CartContext } from "../../context/CartContext";
 
 // ─── Backend base URL ──────────────────────────────────────────────────────────
 const BACKEND_URL = "http://localhost:8000";
@@ -146,6 +147,7 @@ const CATEGORIES = [
 
 // ─── Component ─────────────────────────────────────────────────────────────────
 const Shop = () => {
+  const { addToCart } = useContext(CartContext);
   const GBP_TO_PKR = 360;
   const SKIPPED_PRODUCT_IDS = [2, 7, 10, 13];
   const PRODUCTS_PER_PAGE = 16;
@@ -582,11 +584,11 @@ const Shop = () => {
                       <span className="font-cinzel text-sm font-bold text-[#3c5a25]">
                         {formatPricePKR(product)}
                       </span>
-                      <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3">
                         <button onClick={(e) => e.stopPropagation()} className="p-2 rounded border border-[#f0f0f0] bg-white text-gray-600 hover:bg-[#f3f6f1]">
                           <FiHeart />
                         </button>
-                        <button onClick={(e) => e.stopPropagation()} className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]">
+                        <button onClick={(e) => { e.stopPropagation(); addToCart(product); }} className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]">
                           <FiShoppingCart />
                         </button>
                       </div>
@@ -627,6 +629,14 @@ const Shop = () => {
                       <span className="font-cinzel text-base font-bold text-[#3c5a25]">
                         {formatPricePKR(product)}
                       </span>
+                      <div className="flex items-center gap-3">
+                        <button onClick={(e) => e.stopPropagation()} className="p-2 rounded border border-[#f0f0f0] bg-white text-gray-600 hover:bg-[#f3f6f1]">
+                          <FiHeart />
+                        </button>
+                        <button onClick={(e) => { e.stopPropagation(); addToCart(product); }} className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]">
+                          <FiShoppingCart />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

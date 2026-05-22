@@ -1,33 +1,35 @@
 import { Link } from "react-router-dom";
 
+const BACKEND_URL = "http://localhost:8000";
+
 const products = [
     {
         id: 1,
-        category: "Furniture",
-        name: "Luxury Sofa",
-        price: "Rs. 85,000",
-        image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80",
+        category: "Coffee Table",
+        name: "Study Coffee Table",
+        price: "Rs. 32,000",
+        image: `${BACKEND_URL}/uploads/coffetables/coffetable3.jpg`,
     },
     {
         id: 2,
-        category: "Lighting",
-        name: "Pendant Light",
-        price: "Rs. 12,000",
-        image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&q=80",
+        category: "Mirror with Shelves",
+        name: "Floating Mirror Shelf",
+        price: "Rs. 28,000",
+        image: `${BACKEND_URL}/uploads/mirrorwithshelves/mirrorwithshelf3.jpg`,
     },
     {
         id: 3,
-        category: "Mirrors",
-        name: "Wall Mirror",
+        category: "Wall Art",
+        name: "Abstract Wall Panel",
         price: "Rs. 18,000",
-        image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=400&q=80",
+        image: `${BACKEND_URL}/uploads/islamic%20wall%20art/wallart7.jpg`,
     },
     {
         id: 4,
-        category: "Furniture",
-        name: "Dinning Chair",
-        price: "Rs. 2,500",
-        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&q=80",
+        category: "Office Chair",
+        name: "Study Chair",
+        price: "Rs. 24,000",
+        image: `${BACKEND_URL}/uploads/officechairs/chair5.jpg`,
     },
 ];
 

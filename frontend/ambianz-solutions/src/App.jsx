@@ -4,6 +4,7 @@ import Services from "./pages/Services/Services";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Shop from "./pages/Shop/Shop";
+import Projects from "./pages/Projects/Projects";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -11,6 +12,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/Favorites/Favorites";
 import QuoteModal from "./components/QuoteModal";
+import Cart from "./components/Cart";
 import KitchenDetail from "./pages/Services/components/KitchenDetail";
 import MediaWallDetail from "./pages/Services/components/MediaWallDetail";
 import WardrobeDetail from "./pages/Services/components/WardrobeDetail";
@@ -18,6 +20,7 @@ import DoorDetail from "./pages/Services/components/DoorDetail";
 import CafeDetail from "./pages/Services/components/CafeDetail";
 import SubNavbar from "./pages/Services/components/SubNavbar";
 import { QuoteModalProvider, useQuoteModal } from "./context/QuoteModalContext";
+import CartProvider from "./context/CartContext";
 import Dashboard from "./pages/admin/Dashboard";
 
 // Helper component to render the modal since it needs the context
@@ -47,6 +50,7 @@ const AppContent = () => {
           <Route path="/services/cafe-fitouts" element={<CafeDetail />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/admin" element={<Dashboard />} />
@@ -61,9 +65,12 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <QuoteModalProvider>
-      <AppContent />
-    </QuoteModalProvider>
+    <CartProvider>
+      <QuoteModalProvider>
+        <AppContent />
+        <Cart />
+      </QuoteModalProvider>
+    </CartProvider>
   );
 };
 

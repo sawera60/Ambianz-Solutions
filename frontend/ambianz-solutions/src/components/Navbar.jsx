@@ -1,7 +1,7 @@
 // import React from 'react'
 import logo from "../images/logo.png";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FiSearch,
@@ -12,6 +12,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import { useQuoteModal } from "../context/QuoteModalContext";
+import { CartContext } from "../context/CartContext";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -22,13 +23,12 @@ const navLinks = [
 
 export default function Navbar() {
   const location = useLocation();
+  const { getTotalItems, setIsCartOpen } = useContext(CartContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(Number(localStorage.getItem("cartCount") || 0));
   const [favCount, setFavCount] = useState(JSON.parse(localStorage.getItem("favorites") || "[]").length);
 
   useEffect(() => {
     const handler = () => {
-      setCartCount(Number(localStorage.getItem("cartCount") || 0));
       setFavCount(JSON.parse(localStorage.getItem("favorites") || "[]").length);
     };
     window.addEventListener("storage", handler);
@@ -107,12 +107,12 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <Link to="/cart" className="relative group">
+            <button onClick={() => setIsCartOpen(true)} className="relative group">
               <FiShoppingCart className="text-[#3c5a25] text-lg opacity-90 transition-all duration-300 group-hover:text-[#2a3f1a] group-hover:opacity-100" />
               <span className="absolute -top-2 -right-2 w-4 h-4 bg-[#adb940] rounded-full flex items-center justify-center text-[8px] text-[#1A1C19] font-bold">
-                {cartCount}
+                {getTotalItems()}
               </span>
-            </Link>
+            </button>
 
             <button
               onClick={openQuoteModal}
@@ -124,12 +124,12 @@ export default function Navbar() {
 
           {/* Mobile Actions Button */}
           <div className="flex lg:hidden items-center gap-4">
-            <Link to="/cart" className="relative">
+            <button onClick={() => setIsCartOpen(true)} className="relative">
               <FiShoppingCart className="text-[#1A1C19] text-lg" />
               <span className="absolute -top-1.5 -right-1.5 w-3.5 h-3.5 bg-[#adb940] rounded-full flex items-center justify-center text-[7px] text-[#1A1C19] font-bold">
-                0
+                {getTotalItems()}
               </span>
-            </Link>
+            </button>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 text-[#1A1C19] hover:text-[#3c5a25] transition-colors"
