@@ -113,7 +113,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
     } catch (error) {
       setErrorMessage(
         error.response?.data?.message ||
-          "Failed to save product. Please try again.",
+        "Failed to save product. Please try again.",
       );
     } finally {
       setIsSaving(false);

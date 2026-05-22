@@ -38,6 +38,7 @@ export default function Order() {
       paymentStatus: "Paid",
       fulfillmentStatus: "Processing",
     },
+
     {
       id: "AMB-9042",
       date: "May 19, 2026",
@@ -139,7 +140,7 @@ export default function Order() {
       order.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.email.toLowerCase().includes(searchTerm.toLowerCase());
-      
+
     const matchesPayment = paymentFilter === "All" || order.paymentStatus === paymentFilter;
     const matchesFulfillment = fulfillmentFilter === "All" || order.fulfillmentStatus === fulfillmentFilter;
 
@@ -148,10 +149,10 @@ export default function Order() {
 
   return (
     <div className="space-y-6 animate-fadeIn duration-300">
-      
+
       {/* Control bar */}
       <div className="bg-white p-6 border border-[#e0ddd5] flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
-        
+
         {/* Search */}
         <div className="relative flex-1 max-w-sm">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
@@ -166,7 +167,7 @@ export default function Order() {
 
         {/* Status Dropdowns */}
         <div className="flex flex-wrap gap-3 items-center">
-          
+
           {/* Payment Filter */}
           <div className="relative flex items-center bg-[#F8F6F1] border border-[#e0ddd5]">
             <span className="text-gray-400 text-[10px] font-raleway font-bold pl-3 uppercase tracking-wider">Payment:</span>
@@ -222,13 +223,13 @@ export default function Order() {
               {filteredOrders.length > 0 ? (
                 filteredOrders.map((order) => (
                   <tr key={order.id} className="hover:bg-[#F8F6F1]/30 transition-colors">
-                    
+
                     {/* ID */}
                     <td className="p-4 font-raleway text-xs text-gray-600 font-bold">{order.id}</td>
-                    
+
                     {/* Date */}
                     <td className="p-4 font-raleway text-xs text-gray-500">{order.date}</td>
-                    
+
                     {/* Customer */}
                     <td className="p-4">
                       <div className="flex flex-col">
@@ -311,9 +312,9 @@ export default function Order() {
       {selectedOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedOrder(null)} />
-          
+
           <div className="relative bg-white w-full max-w-3xl border border-[#e0ddd5] shadow-2xl p-6 md:p-8 overflow-y-auto max-h-[90vh] animate-slideIn">
-            
+
             {/* Modal Header */}
             <div className="flex justify-between items-start border-b border-gray-100 pb-5 mb-5">
               <div>
@@ -347,7 +348,7 @@ export default function Order() {
 
             {/* Customer Details & Shipping */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              
+
               {/* Customer Contact */}
               <div className="space-y-4">
                 <h4 className="font-raleway text-[9px] tracking-wider text-gray-400 font-bold uppercase border-b pb-2">Customer Profile</h4>

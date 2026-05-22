@@ -4,13 +4,19 @@ import {
   getProducts,
   updateProduct,
   deleteProduct,
+  seedProducts,
 } from "../controllers/product.controller.js";
 
 const productRouter = express.Router();
 
-productRouter.post("/product", createProduct);
-productRouter.get("/product", getProducts);
-productRouter.put("/product/:id", updateProduct);
-productRouter.delete("/product/:id", deleteProduct);
+// Mounted in index.js as: app.use("/api/product", productRouter)
+// So these routes are: GET /api/product  POST /api/product  etc.
+productRouter.post("/", createProduct);
+productRouter.get("/", getProducts);
+productRouter.put("/:id", updateProduct);
+productRouter.delete("/:id", deleteProduct);
+
+// Seeder - scans backend/uploads and creates product documents
+productRouter.post("/seed", seedProducts);
 
 export default productRouter;

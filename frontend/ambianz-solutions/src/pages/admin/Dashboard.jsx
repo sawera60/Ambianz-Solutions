@@ -18,7 +18,7 @@ import {
   FiSearch,
 } from "react-icons/fi";
 
-// Import other panel components
+
 import QuotesRequest from "./components/QuotesRequest";
 import Products from "./components/Products";
 import Order from "./components/Order";
@@ -29,7 +29,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedProductForEdit, setSelectedProductForEdit] = useState(null);
   const [refreshProductsKey, setRefreshProductsKey] = useState(0);
-
+ 
   const refreshProducts = () => {
     setRefreshProductsKey((prev) => prev + 1);
   };
@@ -164,7 +164,8 @@ export default function Dashboard() {
           </h2>
           <p className="font-raleway text-[10px] md:text-[11px] text-gray-500 leading-snug max-w-2xl">
             Welcome back, Administrator. Here is a quick update from Ambianz
-            Solutions — 8 quote requests and 3 store orders are currently active.
+            Solutions — 8 quote requests and 3 store orders are currently
+            active.
           </p>
         </div>
 

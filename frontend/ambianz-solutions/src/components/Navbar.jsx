@@ -1,7 +1,7 @@
 // import React from 'react'
 import logo from "../images/logo.png";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FiSearch,
@@ -23,6 +23,17 @@ const navLinks = [
 export default function Navbar() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(Number(localStorage.getItem("cartCount") || 0));
+  const [favCount, setFavCount] = useState(JSON.parse(localStorage.getItem("favorites") || "[]").length);
+
+  useEffect(() => {
+    const handler = () => {
+      setCartCount(Number(localStorage.getItem("cartCount") || 0));
+      setFavCount(JSON.parse(localStorage.getItem("favorites") || "[]").length);
+    };
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, []);
   const [searchOpen, setSearchOpen] = useState(false);
   const { openQuoteModal } = useQuoteModal();
 
@@ -91,12 +102,15 @@ export default function Navbar() {
 
             <Link to="/favorites" className="relative group">
               <FiHeart className="text-[#1A1C19] text-lg opacity-70 transition-all duration-300 group-hover:text-[#3c5a25] group-hover:opacity-100" />
+              <span className="absolute -top-2 -right-2 w-4 h-4 bg-[#adb940] rounded-full flex items-center justify-center text-[8px] text-[#1A1C19] font-bold">
+                {favCount}
+              </span>
             </Link>
 
             <Link to="/cart" className="relative group">
-              <FiShoppingCart className="text-[#1A1C19] text-lg opacity-70 transition-all duration-300 group-hover:text-[#3c5a25] group-hover:opacity-100" />
+              <FiShoppingCart className="text-[#3c5a25] text-lg opacity-90 transition-all duration-300 group-hover:text-[#2a3f1a] group-hover:opacity-100" />
               <span className="absolute -top-2 -right-2 w-4 h-4 bg-[#adb940] rounded-full flex items-center justify-center text-[8px] text-[#1A1C19] font-bold">
-                0
+                {cartCount}
               </span>
             </Link>
 

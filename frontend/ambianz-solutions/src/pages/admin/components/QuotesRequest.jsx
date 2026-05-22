@@ -151,7 +151,7 @@ export default function QuotesRequest() {
       quote.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       quote.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       quote.id.toLowerCase().includes(searchTerm.toLowerCase());
-      
+
     const matchesStatus = statusFilter === "All" || quote.status === statusFilter;
     const matchesService = serviceFilter === "All" || quote.service === serviceFilter;
 
@@ -160,10 +160,10 @@ export default function QuotesRequest() {
 
   return (
     <div className="space-y-6 animate-fadeIn duration-300">
-      
+
       {/* Controls Bar */}
       <div className="bg-white p-6 border border-[#e0ddd5] flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
-        
+
         {/* Search */}
         <div className="relative flex-1 max-w-md">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
@@ -178,7 +178,7 @@ export default function QuotesRequest() {
 
         {/* Filters Selectors */}
         <div className="flex flex-wrap gap-4 items-center">
-          
+
           {/* Service Filter */}
           <div className="relative flex items-center bg-[#F8F6F1] border border-[#e0ddd5]">
             <FiLayers className="text-gray-400 text-xs ml-3 pointer-events-none" />
@@ -365,7 +365,7 @@ export default function QuotesRequest() {
 
           {/* Drawer Body */}
           <div className="relative bg-white w-full max-w-2xl border border-[#e0ddd5] shadow-2xl p-6 md:p-8 overflow-y-auto max-h-[90vh] animate-slideIn">
-            
+
             {/* Header info */}
             <div className="flex justify-between items-start border-b border-gray-100 pb-5 mb-5">
               <div>
@@ -412,7 +412,7 @@ export default function QuotesRequest() {
 
             {/* Grid detail inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              
+
               {/* Left Column Client details */}
               <div className="space-y-4">
                 <div>
