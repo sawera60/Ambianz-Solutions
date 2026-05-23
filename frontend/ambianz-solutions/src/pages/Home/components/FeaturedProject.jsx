@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import kitchen1 from "../../../images/3d-kitchen/kitchen1.png";
+import kitchenProject from "../../../images/projectphotos/kitchendesign2.png";
 
 export default function FeaturedProject({
   location = "Islamabad",
-  year = "2024",
+  year = "2026",
   title = "Full Kitchen Fit-out — DHA Phase 2",
   description = "Custom cabinetry, stone countertops, appliance integration, and 3D-designed from concept to installation in 6 weeks.",
   caseStudyLink = "/projects/dha-phase-2",
@@ -16,7 +16,7 @@ export default function FeaturedProject({
           <div className="relative overflow-hidden flex flex-col justify-between h-[300px] lg:h-auto">
             {/* Background Image */}
             <img
-              src={kitchen1}
+              src={kitchenProject}
               alt="Featured Project"
               className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-[2s] hover:scale-110"
             />
