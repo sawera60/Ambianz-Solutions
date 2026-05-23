@@ -36,9 +36,9 @@ const DoorDetail = () => {
                     <p className="font-raleway text-white/80 text-[14px] max-w-lg mb-10 leading-relaxed">
                         A threshold is more than a transition. It is the definitive first note of your sanctuary's architectural symphony.
                     </p>
-                    <button className="bg-[#3c5a25] text-white px-12 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+                    <Link to="/services" className="bg-[#3c5a25] text-white px-12 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
                         Design Your Entrance
-                    </button>
+                    </Link>
                 </div>
             </section>
 
@@ -210,13 +210,13 @@ const DoorDetail = () => {
                         Secure your legacy with a threshold that <i>speaks volumes</i>.
                     </h2>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
-                        <button className="bg-white text-[#3c5a25] px-12 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-2xl">
+                        <Link to="/services" className="bg-white text-[#3c5a25] px-12 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-2xl">
                             Book a Private Showing
-                        </button>
+                        </Link>
                     </div>
-                    <button className="font-raleway text-[11px] tracking-[4px] uppercase border-b border-white/40 pb-1 hover:border-white transition-all">
-                        Experience the collection
-                    </button>
+                    <Link to="/projects" className="font-raleway text-[11px] tracking-[4px] uppercase border-b border-white/40 pb-1 hover:border-white transition-all">
+                        Experience Projects
+                    </Link>
                 </div>
             </section>
 

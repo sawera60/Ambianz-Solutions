@@ -166,15 +166,21 @@ const Shop = () => {
   const [loading, setLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const getPriceGBP = (product) => {
+  const getNumericPrice = (product) => {
+    if (!product) return 0;
     if (typeof product.price === "number") return product.price;
-    const parsed = parseFloat(String(product.price).replace(/[^0-9.]/g, ""));
-    return Number.isFinite(parsed) ? parsed : 0;
+    const s = String(product.price || "");
+    const parsed = parseFloat(s.replace(/[^0-9.]/g, ""));
+    if (!Number.isFinite(parsed)) return 0;
+    // If the static data uses GBP symbol, convert to PKR
+    if (s.includes("£")) return Math.round(parsed * GBP_TO_PKR);
+    // otherwise treat as already PKR
+    return Math.round(parsed);
   };
 
   const formatPricePKR = (product) => {
-    const gbp = getPriceGBP(product);
-    return `Rs. ${Math.round(gbp * GBP_TO_PKR).toLocaleString()}`;
+    const pkr = getNumericPrice(product);
+    return `Rs. ${pkr.toLocaleString()}`;
   };
 
   const normalizeCategory = (rawCategory) => {
@@ -208,7 +214,7 @@ const Shop = () => {
           id: p._id || p.id || i,
           name: p.Pname || p.name,
           category: normalizeCategory(p.category),
-          price: `£${p.pprice}`,
+          price: p.pprice,
           material: p.material || "Unknown",
           img: p.image?.startsWith("http") ? p.image : `${BACKEND_URL}/uploads/${p.image}`,
         }));
@@ -229,7 +235,7 @@ const Shop = () => {
   }, [fetchProducts]);
 
   useEffect(() => {
-    const prices = products.map(getPriceGBP);
+    const prices = products.map(getNumericPrice);
     const minPrice = Math.min(...prices, 0);
     const maxPrice = Math.max(...prices, 1000);
     setPriceRangeBounds([minPrice, maxPrice]);
@@ -266,7 +272,7 @@ const Shop = () => {
       const previousCoffeeCount = arr.slice(0, index).filter((item) => item.category === "Coffee Table").length;
       if (previousCoffeeCount >= 6) return false;
     }
-    const productPrice = getPriceGBP(product);
+    const productPrice = getNumericPrice(product);
     const matchesPrice = productPrice >= priceRange[0] && productPrice <= priceRange[1];
     const matchesMaterial =
       selectedMaterials.length === 0 || selectedMaterials.includes((product.material || "Unknown").toString());

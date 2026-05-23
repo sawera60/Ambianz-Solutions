@@ -278,6 +278,36 @@ const Services = () => {
           <ServiceChapter key={svc.id} svc={svc} index={i} />
         ))}
       </div>
+
+      {/* ===== WHITE CTA / SERVICE SUMMARY (before footer) ===== */}
+      <section className="bg-white py-20 border-t border-[#e0ddd7]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+            <div className="p-8 border border-[#e8e6e0]">
+              <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">Consult</p>
+              <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">Initial Consultation</h3>
+              <p className="font-raleway text-sm text-gray-600">Discuss objectives, site constraints and user needs with our design team to set the project brief and scope.</p>
+            </div>
+
+            <div className="p-8 border border-[#e8e6e0]">
+              <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">Design</p>
+              <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">Concept & Delivery</h3>
+              <p className="font-raleway text-sm text-gray-600">From detailed 3D visualisations to material selection and technical drawings — we translate vision into buildable documentation.</p>
+            </div>
+
+            <div className="p-8 border border-[#e8e6e0] flex flex-col justify-between">
+              <div>
+                <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">Build</p>
+                <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">Bespoke Fabrication</h3>
+                <p className="font-raleway text-sm text-gray-600 mb-6">Our workshop and installation teams ensure millimetre-perfect execution with premium materials and skilled craftsmanship.</p>
+              </div>
+              <div className="mt-4">
+                <Link to="/contact" className="inline-block bg-[#3c5a25] text-white px-6 py-3 font-raleway text-[10px] tracking-[2px] uppercase">Request a Quote</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

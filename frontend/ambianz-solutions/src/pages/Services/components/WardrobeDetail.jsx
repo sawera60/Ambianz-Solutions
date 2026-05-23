@@ -1,13 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  FiClock,
-  FiTag,
-  FiLayers,
-  FiArrowRight,
-  FiMaximize2,
-  FiCpu,
-} from "react-icons/fi";
 
 // Image Imports
 import heroImg from "../../../images/wardrobe.png";
@@ -15,14 +7,12 @@ import couturierImg from "../../../images/closet.jpg";
 import sub1 from "../../../images/integratedluminescene.png";
 import sub2 from "../../../images/materialntegrity.png";
 import sub3 from "../../../images/handle.png";
-import detail1 from "../../../images/cabinetry.png";
-import detail2 from "../../../images/hiddenstorage.png";
 import style1 from "../../../images/grandwalkin.png";
 import style2 from "../../../images/modernwalltowall.png";
 import style3 from "../../../images/atliersuite.png";
-import style4 from "../../../images/3d-wardrobe/wardrobe2.jpg";
-import style5 from "../../../images/interior4.jpg"; // Using high-end interiors for extra styles
-import style6 from "../../../images/interior7.jpg";
+import opendressingroom from "../../../images/3d-wardrobe/opendressingroom.jpg";
+import slidingwardrobe from "../../../images/3d-wardrobe/slidingwardrobe.jpg";
+import mirroredwardrobe from "../../../images/3d-wardrobe/mirrorglasswardrobe.jpg";
 
 const WardrobeDetail = () => {
   return (
@@ -47,9 +37,9 @@ const WardrobeDetail = () => {
             and tactile luxury.
           </p>
           <div className="flex gap-6">
-            <button className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+            <Link to="/services" className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
               Book Consultant
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -228,17 +218,17 @@ const WardrobeDetail = () => {
               tag: "DUO-TONED & EDITORIAL",
             },
             {
-              img: style4,
+              img: slidingwardrobe,
               title: "Sliding Elegance",
               tag: "MINIMAL & EFFICIENT",
             },
             {
-              img: style5,
-              title: "The Mirrored Gallery",
+              img: mirroredwardrobe,
+              title: "Mirrored Glass Wardrobe",
               tag: "LIGHT & LUXURY",
             },
             {
-              img: style6,
+              img: opendressingroom,
               title: "Open Dressing Room",
               tag: "EDITORIAL & ACCESSIBLE",
             },
@@ -262,6 +252,57 @@ const WardrobeDetail = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 5. WHITE CTA / SERVICE SUMMARY BEFORE FOOTER */}
+      <section className="bg-white py-20 border-t border-[#e0ddd7]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-8 border border-[#e8e6e0] rounded-xl">
+              <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">
+                Consult
+              </p>
+              <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">
+                Design Consultation
+              </h3>
+              <p className="font-raleway text-sm text-gray-600">
+                Define your wardrobe vision with our expert designers, tailored to your storage needs and space.
+              </p>
+            </div>
+
+            <div className="p-8 border border-[#e8e6e0] rounded-xl">
+              <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">
+                Create
+              </p>
+              <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">
+                Bespoke Joinery
+              </h3>
+              <p className="font-raleway text-sm text-gray-600">
+                From detailed drawings to premium finishes, our tailored wardrobes are crafted for a seamless lifestyle.
+              </p>
+            </div>
+
+            <div className="p-8 border border-[#e8e6e0] rounded-xl flex flex-col justify-between">
+              <div>
+                <p className="font-raleway text-[10px] tracking-[4px] text-[#adb940] uppercase mb-3">
+                  Install
+                </p>
+                <h3 className="font-cinzel text-2xl text-[#1A1C19] mb-4">
+                  Precision Fit-Out
+                </h3>
+                <p className="font-raleway text-sm text-gray-600 mb-6">
+                  Our installation team ensures every wardrobe system is assembled with perfect alignment and lasting performance.
+                </p>
+              </div>
+              <Link
+                to="/projects"
+                className="inline-block bg-[#3c5a25] text-white px-6 py-3 font-raleway text-[10px] tracking-[2px] uppercase rounded-full"
+              >
+                Explore Projects
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

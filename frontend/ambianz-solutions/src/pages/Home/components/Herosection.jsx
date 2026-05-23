@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
-import { useQuoteModal } from "../../../context/QuoteModalContext";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,8 +15,6 @@ import officeBg from "../../../images/officeA.jpg";
 import cafeA from "../../../images/cafeA.jpg";
 
 export default function Herosection() {
-  const { openQuoteModal } = useQuoteModal();
-
   const slides = [
     {
       image: heroKitchen,
@@ -26,32 +23,28 @@ export default function Herosection() {
       desc: "Premium home decor & bespoke interiors — kitchens, wardrobes, doors, and media walls, designed around how you live.",
       primaryText: "EXPLORE SERVICES",
       primaryLink: "/services",
-      secondaryText: "VIEW PORTFOLIO",
-      secondaryLink: "/services#portfolio",
-      isButtonAction: false,
+      secondaryText: "VIEW PROJECTS",
+      secondaryLink: "/projects",
     },
     {
       image: wardrobeBg,
       subtitle: "FITTED WARDROBES",
       title: "Smart Storage Solutions",
       desc: "Optimize your personal space with handcrafted built-in closets, bespoke walk-in wardrobes, and sliding doors.",
-      primaryText: "EXPLORE WARDROBES",
-      primaryLink: "/services",
-      secondaryText: "GET A QUOTE",
-      secondaryLink: "",
-      isButtonAction: true,
-      primaryAction: openQuoteModal,
+      primaryText: "VIEW WARDROBES",
+      primaryLink: "/services/wardrobes",
+      secondaryText: "VIEW PROJECTS",
+      secondaryLink: "/projects",
     },
     {
       image: mediaWallBg,
       subtitle: "BESPOKE MEDIA WALLS",
       title: "Entertainment Redefined",
       desc: "Create a stunning focal point in your home with customized media walls, floating shelves, and integrated smart LED design.",
-      primaryText: "EXPLORE DESIGNS",
-      primaryLink: "/services",
+      primaryText: "EXPLORE MEDIA WALLS",
+      primaryLink: "/services/media-walls",
       secondaryText: "VIEW PROJECTS",
       secondaryLink: "/projects",
-      isButtonAction: false,
     },
     {
       image: heroShop,
@@ -60,9 +53,8 @@ export default function Herosection() {
       desc: "Elevate your space with our premium furniture, designer lighting, and custom candles, handpicked to make a statement.",
       primaryText: "SHOP PRODUCTS",
       primaryLink: "/shop",
-      secondaryText: "VIEW FAVORITES",
-      secondaryLink: "/favorites",
-      isButtonAction: false,
+      secondaryText: "VIEW PROJECTS",
+      secondaryLink: "/projects",
     },
     {
       image: officeBg,
@@ -71,22 +63,18 @@ export default function Herosection() {
       desc: "Enhance productivity with our bespoke conference rooms, modern offices, receptions, and architectural paneling.",
       primaryText: "VIEW PROJECTS",
       primaryLink: "/projects",
-      secondaryText: "GET A QUOTE",
-      secondaryLink: "",
-      isButtonAction: true,
-      primaryAction: openQuoteModal,
+      secondaryText: "EXPLORE SERVICES",
+      secondaryLink: "/services",
     },
     {
       image: cafeA,
       subtitle: "PREMIUM COMMERCIAL SPACES",
       title: "Cafe & Turnkey Fit-Outs",
-      desc: "From modern cafe designs to high-end lounges, we deliver bespoke commercial joinery and turnkey solutions.",
-      primaryText: "GET A QUOTE",
-      primaryLink: "",
-      secondaryText: "EXPLORE SERVICES",
-      secondaryLink: "/services",
-      isButtonAction: true,
-      primaryAction: openQuoteModal,
+      desc: "From modern cafe spaces to high-end lounges, we deliver bespoke commercial joinery and turnkey solutions.",
+      primaryText: "EXPLORE SERVICES",
+      primaryLink: "/services",
+      secondaryText: "VIEW PROJECTS",
+      secondaryLink: "/projects",
     },
   ];
 
@@ -144,37 +132,19 @@ export default function Herosection() {
                   </p>
 
                   <div className="flex flex-row flex-wrap gap-3 justify-center md:justify-start">
-                    {slide.isButtonAction ? (
-                      <button
-                        onClick={slide.primaryAction}
-                        className="bg-[#3c5a25] cursor-pointer text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-medium font-raleway transition-all duration-300 hover:bg-[#4a6b2e] hover:scale-105 hover:shadow-xl inline-block uppercase text-center"
-                      >
-                        {slide.primaryText}
-                      </button>
-                    ) : (
-                      <Link
-                        to={slide.primaryLink}
-                        className="bg-[#3c5a25] text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-medium font-raleway transition-all duration-300 hover:bg-[#4a6b2e] hover:scale-105 hover:shadow-xl inline-block no-underline uppercase text-center"
-                      >
-                        {slide.primaryText}
-                      </Link>
-                    )}
+                    <Link
+                      to={slide.primaryLink}
+                      className="bg-[#3c5a25] text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-medium font-raleway transition-all duration-300 hover:bg-[#4a6b2e] hover:scale-105 hover:shadow-xl inline-block no-underline uppercase text-center"
+                    >
+                      {slide.primaryText}
+                    </Link>
 
-                    {slide.secondaryLink ? (
-                      <Link
-                        to={slide.secondaryLink}
-                        className="border border-white/60 text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-raleway transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:shadow-xl inline-block no-underline uppercase text-center"
-                      >
-                        {slide.secondaryText}
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={openQuoteModal}
-                        className="border border-white/60 text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-raleway transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:shadow-xl inline-block uppercase text-center"
-                      >
-                        {slide.secondaryText}
-                      </button>
-                    )}
+                    <Link
+                      to={slide.secondaryLink}
+                      className="border border-white/60 text-white px-5 md:px-10 py-3.5 md:py-4 text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] font-raleway transition-all duration-300 hover:bg-white/10 hover:scale-105 hover:shadow-xl inline-block no-underline uppercase text-center"
+                    >
+                      {slide.secondaryText}
+                    </Link>
                   </div>
                 </div>
               </div>

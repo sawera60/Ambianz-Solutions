@@ -34,9 +34,9 @@ const KitchenDetail = () => {
                     <h1 className="font-cinzel text-white text-[clamp(32px,6vw,72px)] font-bold leading-tight mb-8">
                         The Epicenter of <br /> the Home
                     </h1>
-                    <button className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+                    <Link to="/services" className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
                         Consult with us
-                    </button>
+                    </Link>
                 </div>
             </section>
 
@@ -132,7 +132,7 @@ const KitchenDetail = () => {
                             The Kitchen Portfolio
                         </h2>
                     </div>
-                    <Link to="/portfolio" className="font-raleway text-[10px] tracking-[2px] text-[#3c5a25] uppercase border-b border-[#3c5a25] pb-1 font-semibold">
+                    <Link to="/projects" className="font-raleway text-[10px] tracking-[2px] text-[#3c5a25] uppercase border-b border-[#3c5a25] pb-1 font-semibold">
                         View All Projects
                     </Link>
                 </div>
@@ -210,12 +210,12 @@ const KitchenDetail = () => {
                         Book a private consultation at our showroom and design the creation of your bespoke kitchen.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <button className="bg-white text-[#3c5a25] px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-xl">
+                        <Link to="/services" className="bg-white text-[#3c5a25] px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-xl">
                             Consult with us
-                        </button>
-                        <button className="border-2 border-white text-white px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
-                            View Portfolio
-                        </button>
+                        </Link>
+                        <Link to="/projects" className="border-2 border-white text-white px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+                            View Projects
+                        </Link>
                     </div>
                 </div>
             </section>

@@ -68,7 +68,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "pprice" || name === "quantity" ? Number(value) : value,
+      [name]: name === "pprice" || name === "quantity" || name === "id" ? Number(value) : value,
     }));
   };
 
@@ -176,10 +176,12 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                   PRODUCT CODE / ID
                 </label>
                 <input
-                  type="text"
+                  type="number"
+                  name="id"
                   value={formData.id}
-                  disabled
-                  className="w-full p-3.5 border border-[#e0ddd5] bg-gray-50 font-raleway text-xs text-gray-400 tracking-wider cursor-not-allowed"
+                  onChange={handleChange}
+                  disabled={isEditMode}
+                  className={`w-full p-3.5 border border-[#e0ddd5] ${isEditMode ? "bg-gray-50 text-gray-400 cursor-not-allowed" : "bg-transparent"} font-raleway text-xs tracking-wider`}
                 />
               </div>
 
@@ -204,7 +206,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                 {/* Price */}
                 <div>
                   <label className="font-raleway text-[9px] tracking-wider text-gray-400 font-bold uppercase mb-2 flex items-center gap-1.5">
-                    <FiDollarSign size={10} /> PRICE (GBP) *
+                    <FiDollarSign size={10} /> PRICE (PKR) *
                   </label>
                   <input
                     type="number"
@@ -213,7 +215,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                     onChange={handleChange}
                     required
                     min="0"
-                    placeholder="245"
+                    placeholder="25000"
                     className="w-full p-3.5 border border-[#e0ddd5] focus:border-[#3c5a25] outline-none font-raleway text-xs text-[#1A1C19] tracking-wide bg-transparent"
                   />
                 </div>
@@ -253,13 +255,13 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                     <option value="" disabled>
                       SELECT CATEGORY
                     </option>
-                    <option value="lighting">Lighting</option>
-                    <option value="wall_art">Wall Art</option>
-                    <option value="clocks">Clocks</option>
-                    <option value="mirrors">Mirrors</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="hardware">Hardware</option>
-                    <option value="planters">Planters</option>
+                    <option value="Lighting">Lighting</option>
+                    <option value="Wall Art">Wall Art</option>
+                    <option value="Clocks">Clocks</option>
+                    <option value="Full Length Mirror">Full Length Mirror</option>
+                    <option value="Coffee Table">Coffee Table</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Study Table">Study Table</option>
                   </select>
                   <span className="absolute right-4.5 bottom-4 text-gray-400 text-[10px] pointer-events-none">
                     ▼

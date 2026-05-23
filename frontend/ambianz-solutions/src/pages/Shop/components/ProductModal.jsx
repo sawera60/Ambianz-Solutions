@@ -3,16 +3,19 @@ import { FiHeart, FiShoppingCart, FiX } from "react-icons/fi";
 
 const GBP_TO_PKR = 360;
 
-const getPriceGBP = (product) => {
+const getNumericPrice = (product) => {
   if (!product) return 0;
   if (typeof product.price === "number") return product.price;
-  const parsed = parseFloat(String(product.price).replace(/[^0-9.]/g, ""));
-  return Number.isFinite(parsed) ? parsed : 0;
+  const s = String(product.price || "");
+  const parsed = parseFloat(s.replace(/[^0-9.]/g, ""));
+  if (!Number.isFinite(parsed)) return 0;
+  if (s.includes("£")) return Math.round(parsed * GBP_TO_PKR);
+  return Math.round(parsed);
 };
 
 const formatPricePKR = (product) => {
-  const gbp = getPriceGBP(product);
-  return `Rs. ${Math.round(gbp * GBP_TO_PKR).toLocaleString()}`;
+  const pkr = getNumericPrice(product);
+  return `Rs. ${pkr.toLocaleString()}`;
 };
 
 const ProductModal = ({ product, onClose }) => {

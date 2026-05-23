@@ -32,9 +32,9 @@ const CafeDetail = () => {
             meets architectural precision. The design contributes to the perfect
             shot."
           </p>
-          <button className="bg-[#3c5a25] text-white px-12 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
-            Request Portfolio
-          </button>
+          <Link to="/projects" className="bg-[#3c5a25] text-white px-12 py-5 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+            View Projects
+          </Link>
         </div>
       </section>
 
@@ -101,10 +101,10 @@ const CafeDetail = () => {
               Curated Hospitality
             </h2>
             <Link
-              to="/portfolio"
+              to="/projects"
               className="font-raleway text-[#adb940] text-[10px] tracking-[4px] uppercase font-bold border-b border-[#adb940] pb-1"
             >
-              GLOBAL PORTFOLIO ARCHIVE
+              GLOBAL PROJECTS ARCHIVE
             </Link>
           </div>
 
@@ -305,12 +305,12 @@ const CafeDetail = () => {
             Defining your commercial legacy <br /> <i>begins here.</i>
           </h2>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <button className="bg-[#3c5a25] text-white px-10 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300 shadow-2xl">
+            <Link to="/projects" className="bg-[#3c5a25] text-white px-10 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300 shadow-2xl">
               Request a Prospectus
-            </button>
-            <button className="bg-transparent border border-white/20 text-white px-10 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white/10 transition-all">
+            </Link>
+            <Link to="/services" className="bg-transparent border border-white/20 text-white px-10 py-5 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white/10 transition-all">
               Book a Consultant
-            </button>
+            </Link>
           </div>
         </div>
       </section>

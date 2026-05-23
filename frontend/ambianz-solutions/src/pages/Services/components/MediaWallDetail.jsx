@@ -40,12 +40,12 @@ const MediaWallDetail = () => {
                         Cinematic <br /> Architecture
                     </h1>
                     <div className="flex gap-6">
-                        <button className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+                        <Link to="/services" className="bg-[#3c5a25] text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
                             Start Project
-                        </button>
-                        <button className="border border-white/30 text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300 backdrop-blur-sm">
-                            View Collection
-                        </button>
+                        </Link>
+                        <Link to="/projects" className="border border-white/30 text-white px-10 py-4 font-raleway text-[11px] tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300 backdrop-blur-sm">
+                            View Projects
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -139,10 +139,10 @@ const MediaWallDetail = () => {
                                 </p>
                             </div>
                         </div>
-                        <button className="flex items-center gap-3 group">
+                        <Link to="/projects" className="flex items-center gap-3 group">
                             <span className="font-raleway text-[10px] tracking-[3px] uppercase font-bold text-[#1A1C19]">Explore Collections</span>
                             <FiArrowRight className="text-[#adb940] group-hover:translate-x-2 transition-transform" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -201,12 +201,12 @@ const MediaWallDetail = () => {
                         Book a private consultation at our showroom and design the creation of your bespoke media wall.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <button className="bg-white text-[#3c5a25] px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-xl">
+                        <Link to="/services" className="bg-white text-[#3c5a25] px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-[#adb940] hover:text-white transition-all duration-300 shadow-xl">
                             Consult with us
-                        </button>
-                        <button className="border-2 border-white text-white px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
-                            View Portfolio
-                        </button>
+                        </Link>
+                        <Link to="/projects" className="border-2 border-white text-white px-12 py-4 font-raleway text-[11px] font-bold tracking-[3px] uppercase hover:bg-white hover:text-[#3c5a25] transition-all duration-300">
+                            View Projects
+                        </Link>
                     </div>
                 </div>
             </section>
