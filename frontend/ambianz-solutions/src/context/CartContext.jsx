@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { getPricePKR } from "../utils/pricing.js";
 
 export const CartContext = createContext();
 
@@ -63,10 +64,7 @@ const CartProvider = ({ children }) => {
 
   const getTotalPrice = () => {
     return cartItems.reduce((total, item) => {
-      const price = typeof item.price === "number" 
-        ? item.price 
-        : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
-      return total + price * item.quantity;
+      return total + getPricePKR(item) * item.quantity;
     }, 0);
   };
 

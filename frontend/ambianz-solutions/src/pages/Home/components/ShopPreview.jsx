@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-
-const BACKEND_URL = "http://localhost:8000";
+import { getImageUrl } from "../../../utils/api.js";
 
 const products = [
     {
@@ -8,28 +7,28 @@ const products = [
         category: "Coffee Table",
         name: "Study Coffee Table",
         price: "Rs. 32,000",
-        image: `${BACKEND_URL}/uploads/coffetables/coffetable3.jpg`,
+        image: getImageUrl("coffetables/coffetable3.jpg"),
     },
     {
         id: 2,
         category: "Mirror with Shelves",
         name: "Floating Mirror Shelf",
         price: "Rs. 28,000",
-        image: `${BACKEND_URL}/uploads/mirrorwithshelves/mirrorwithshelf3.jpg`,
+        image: getImageUrl("mirrorwithshelves/mirrorwithshelf3.jpg"),
     },
     {
         id: 3,
         category: "Wall Art",
         name: "Abstract Wall Panel",
         price: "Rs. 18,000",
-        image: `${BACKEND_URL}/uploads/islamic%20wall%20art/wallart7.jpg`,
+        image: getImageUrl("islamic wall art/wallart7.jpg"),
     },
     {
         id: 4,
         category: "Office Chair",
         name: "Study Chair",
         price: "Rs. 24,000",
-        image: `${BACKEND_URL}/uploads/officechairs/chair5.jpg`,
+        image: getImageUrl("officechairs/chair5.jpg"),
     },
 ];
 

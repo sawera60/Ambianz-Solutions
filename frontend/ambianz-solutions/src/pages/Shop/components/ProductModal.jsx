@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiHeart, FiShoppingCart, FiX } from "react-icons/fi";
-
-const GBP_TO_PKR = 360;
-
-const getNumericPrice = (product) => {
-  if (!product) return 0;
-  if (typeof product.price === "number") return product.price;
-  const s = String(product.price || "");
-  const parsed = parseFloat(s.replace(/[^0-9.]/g, ""));
-  if (!Number.isFinite(parsed)) return 0;
-  if (s.includes("£")) return Math.round(parsed * GBP_TO_PKR);
-  return Math.round(parsed);
-};
-
-const formatPricePKR = (product) => {
-  const pkr = getNumericPrice(product);
-  return `Rs. ${pkr.toLocaleString()}`;
-};
+import { CartContext } from "../../../context/CartContext.jsx";
+import { formatPricePKR } from "../../../utils/pricing.js";
 
 const ProductModal = ({ product, onClose }) => {
   const [isFav, setIsFav] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     if (!product) return;
@@ -40,13 +26,6 @@ const ProductModal = ({ product, onClose }) => {
       setIsFav(true);
     }
     localStorage.setItem("favorites", JSON.stringify(next));
-    // notify navbar listeners
-    window.dispatchEvent(new Event("storage"));
-  };
-
-  const addToCart = () => {
-    const count = Number(localStorage.getItem("cartCount") || 0) + 1;
-    localStorage.setItem("cartCount", String(count));
     window.dispatchEvent(new Event("storage"));
   };
 
@@ -66,7 +45,7 @@ const ProductModal = ({ product, onClose }) => {
             <p className="font-cinzel text-lg text-[#3c5a25]">{formatPricePKR(product)}</p>
             <p className="text-sm text-gray-700">{product.description || "No description available."}</p>
             <div className="flex items-center gap-3 mt-auto">
-              <button onClick={addToCart} className="px-4 py-2 bg-[#3c5a25] text-white rounded flex items-center gap-2">
+              <button onClick={() => addToCart(product)} className="px-4 py-2 bg-[#3c5a25] text-white rounded flex items-center gap-2">
                 <FiShoppingCart /> Add to Cart
               </button>
               <button onClick={toggleFav} className={`px-3 py-2 rounded border flex items-center gap-2 ${isFav ? "bg-[#fdecec] text-[#b91c1c]" : "bg-white text-gray-700"}`}>

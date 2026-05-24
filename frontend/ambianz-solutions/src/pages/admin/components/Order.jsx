@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FiSearch,
   FiEye,
@@ -90,6 +90,27 @@ export default function Order() {
     },
   ]);
 
+  useEffect(() => {
+    const savedOrders = JSON.parse(localStorage.getItem("customerOrders") || "[]");
+    if (!savedOrders.length) return;
+
+    const normalizedOrders = savedOrders.map((order) => ({
+      customerName: "Storefront Customer",
+      email: "checkout via WhatsApp",
+      phone: "Not provided",
+      shippingAddress: "To be confirmed",
+      ...order,
+    }));
+
+    setOrders((currentOrders) => {
+      const existingIds = new Set(currentOrders.map((order) => order.id));
+      return [
+        ...normalizedOrders.filter((order) => !existingIds.has(order.id)),
+        ...currentOrders,
+      ];
+    });
+  }, []);
+
   // Handle status update
   const handlePaymentChange = (id, newStatus) => {
     setOrders(
@@ -133,6 +154,11 @@ export default function Order() {
         return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
+
+  const formatOrderMoney = (order, amount) =>
+    order.currency === "PKR"
+      ? `Rs. ${Math.round(amount).toLocaleString()}`
+      : `£${Number(amount).toFixed(2)}`;
 
   // Filter lists
   const filteredOrders = orders.filter((order) => {
@@ -246,7 +272,7 @@ export default function Order() {
                     </td>
 
                     {/* Total */}
-                    <td className="p-4 font-cinzel text-xs font-bold text-[#3c5a25]">£{order.total.toFixed(2)}</td>
+                    <td className="p-4 font-cinzel text-xs font-bold text-[#3c5a25]">{formatOrderMoney(order, order.total)}</td>
 
                     {/* Payment Dropdown */}
                     <td className="p-4">
@@ -395,9 +421,9 @@ export default function Order() {
                           />
                         </td>
                         <td className="p-3">{item.name}</td>
-                        <td className="p-3 text-right">£{item.price.toFixed(2)}</td>
+                        <td className="p-3 text-right">{formatOrderMoney(selectedOrder, item.price)}</td>
                         <td className="p-3 text-center font-bold">{item.qty}</td>
-                        <td className="p-3 text-right font-semibold text-[#3c5a25]">£{(item.price * item.qty).toFixed(2)}</td>
+                        <td className="p-3 text-right font-semibold text-[#3c5a25]">{formatOrderMoney(selectedOrder, item.price * item.qty)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -410,15 +436,15 @@ export default function Order() {
               <div className="w-64 space-y-3 font-raleway text-xs border-t border-gray-100 pt-4">
                 <div className="flex justify-between text-gray-500 font-medium">
                   <span>Cart Subtotal</span>
-                  <span>£{selectedOrder.subtotal.toFixed(2)}</span>
+                  <span>{formatOrderMoney(selectedOrder, selectedOrder.subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-gray-500 font-medium">
                   <span>Insured Shipping</span>
-                  <span>£{selectedOrder.shipping.toFixed(2)}</span>
+                  <span>{formatOrderMoney(selectedOrder, selectedOrder.shipping)}</span>
                 </div>
                 <div className="flex justify-between font-cinzel font-bold text-sm text-[#1A1C19] pt-2 border-t">
                   <span>Grand Total</span>
-                  <span className="text-[#3c5a25]">£{selectedOrder.total.toFixed(2)}</span>
+                  <span className="text-[#3c5a25]">{formatOrderMoney(selectedOrder, selectedOrder.total)}</span>
                 </div>
               </div>
             </div>

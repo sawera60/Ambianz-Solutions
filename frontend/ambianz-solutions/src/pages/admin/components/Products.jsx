@@ -13,6 +13,7 @@ import {
   FiList,
 } from "react-icons/fi";
 import { authDataContext } from "../../../context/AuthContext.jsx";
+import { getImageUrl } from "../../../utils/api.js";
 
 export default function Products({ refreshTrigger, onEditProduct, onNavigateToAdd }) {
   const { serverUrl } = useContext(authDataContext);
@@ -194,7 +195,7 @@ export default function Products({ refreshTrigger, onEditProduct, onNavigateToAd
                 {/* Product Image block */}
                 <div className="relative aspect-video w-full overflow-hidden bg-gray-100 border-b border-[#e0ddd5]">
                   <img
-                    src={product.image}
+                    src={getImageUrl(product.image)}
                     alt={product.Pname}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
@@ -290,7 +291,7 @@ export default function Products({ refreshTrigger, onEditProduct, onNavigateToAd
                       <td className="p-4 text-center font-raleway text-xs text-gray-400 font-bold">{product.id}</td>
                       <td className="p-4">
                         <img
-                          src={product.image}
+                          src={getImageUrl(product.image)}
                           alt={product.Pname}
                           className="w-12 h-12 object-cover border border-[#e0ddd5]"
                         />

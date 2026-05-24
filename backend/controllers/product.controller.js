@@ -4,12 +4,28 @@ import path from "path";
 import { fileURLToPath } from "url";
 import imageSize from "image-size";
 
+const getErrorResponse = (error) => {
+  if (error.name === "ValidationError") {
+    return { status: 400, message: error.message };
+  }
+
+  if (error.message?.includes("bufferCommands = false")) {
+    return {
+      status: 503,
+      message: "Database is not connected. Check MongoDB Atlas network access and credentials.",
+    };
+  }
+
+  return { status: 500, message: "Internal Server Error" };
+};
+
 export const createProduct = async (req, res) => {
   try {
-    const { id, Pname, pprice, image, category, material, description, quantity } = req.body;
+    const { id, Pname, pprice, category, description, quantity } = req.body;
+    const image = req.file ? `products/${req.file.filename}` : req.body.image;
+    const material = String(req.body.material || "").toLowerCase();
 
     if (
-      id === undefined ||
       !Pname ||
       pprice === undefined ||
       !image ||
@@ -24,23 +40,24 @@ export const createProduct = async (req, res) => {
       });
     }
 
-    const existingProduct = await Product.findOne({ id });
-    if (existingProduct) {
-      return res.status(409).json({
-        message: "A product with this ID already exists",
-        success: false,
-      });
+    let productId = Number(id);
+    if (!Number.isFinite(productId)) {
+      const maxDoc = await Product.findOne().sort({ id: -1 });
+      productId = maxDoc ? Number(maxDoc.id) + 1 : 1;
+    } else if (await Product.findOne({ id: productId })) {
+      const maxDoc = await Product.findOne().sort({ id: -1 });
+      productId = maxDoc ? Number(maxDoc.id) + 1 : productId + 1;
     }
 
     const product = await Product.create({
-      id,
+      id: productId,
       Pname,
-      pprice,
+      pprice: Number(pprice),
       image,
       category,
       material,
       description,
-      quantity,
+      quantity: Number(quantity),
     });
 
     return res.status(201).json({
@@ -49,8 +66,9 @@ export const createProduct = async (req, res) => {
       product,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Internal Server Error",
+    const response = getErrorResponse(error);
+    res.status(response.status).json({
+      message: response.message,
       error: error.message,
       success: false,
     });
@@ -66,8 +84,9 @@ export const getProducts = async (req, res) => {
       products,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: "Internal Server Error",
+    const response = getErrorResponse(error);
+    return res.status(response.status).json({
+      message: response.message,
       error: error.message,
       success: false,
     });
@@ -77,7 +96,13 @@ export const getProducts = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const productId = Number(req.params.id);
-    const updateData = req.body;
+    const updateData = {
+      ...req.body,
+      ...(req.file ? { image: `products/${req.file.filename}` } : {}),
+      ...(req.body.material ? { material: String(req.body.material).toLowerCase() } : {}),
+      ...(req.body.pprice !== undefined ? { pprice: Number(req.body.pprice) } : {}),
+      ...(req.body.quantity !== undefined ? { quantity: Number(req.body.quantity) } : {}),
+    };
 
     const product = await Product.findOneAndUpdate({ id: productId }, updateData, {
       new: true,
@@ -97,8 +122,9 @@ export const updateProduct = async (req, res) => {
       product,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: "Internal Server Error",
+    const response = getErrorResponse(error);
+    return res.status(response.status).json({
+      message: response.message,
       error: error.message,
       success: false,
     });
@@ -123,8 +149,9 @@ export const deleteProduct = async (req, res) => {
       product,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: "Internal Server Error",
+    const response = getErrorResponse(error);
+    return res.status(response.status).json({
+      message: response.message,
       error: error.message,
       success: false,
     });
@@ -186,7 +213,7 @@ export const seedProducts = async (req, res) => {
           const name = path.basename(file, path.extname(file)).replace(/[-_]/g, " ").replace(/\s+/g, " ").trim();
           const Pname = name.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
-          const material = mappedCategory === "Hardware" ? "Metal" : (mappedCategory.includes("Chair") || mappedCategory.includes("Stool") ? "Fabric" : "Wood");
+          const material = mappedCategory === "Hardware" ? "metal" : (mappedCategory.includes("Mirror") ? "glass" : "wood");
           const pprice = Math.floor(50 + Math.random() * 450);
 
           await Product.create({

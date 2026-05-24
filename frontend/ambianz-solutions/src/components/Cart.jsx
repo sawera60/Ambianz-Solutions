@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { CartContext } from "../context/CartContext";
-import { FiX, FiTrash2, FiMinus, FiPlus } from "react-icons/fi";
+import { FiCheckCircle, FiMinus, FiPlus, FiTrash2, FiX } from "react-icons/fi";
+import { formatPricePKR, getPricePKR } from "../utils/pricing.js";
 
 const Cart = () => {
   const {
@@ -12,15 +13,53 @@ const Cart = () => {
     getTotalPrice,
     clearCart,
   } = useContext(CartContext);
+  const [checkoutMessage, setCheckoutMessage] = useState("");
 
-  const formatPrice = (price) => {
-    const numPrice = typeof price === "number"
-      ? price
-      : parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;
-    return `Rs. ${Math.round(numPrice * 360).toLocaleString()}`;
+  const totalPricePKR = getTotalPrice();
+
+  const checkoutUrl = useMemo(() => {
+    const lines = cartItems.map(
+      (item) =>
+        `${item.quantity} x ${item.name} - ${formatPricePKR(getPricePKR(item) * item.quantity)}`,
+    );
+    const message = [
+      "Hello Ambianz Solutions, I would like to checkout these items:",
+      ...lines,
+      `Total: ${formatPricePKR(totalPricePKR)}`,
+    ].join("\n");
+
+    return `https://wa.me/?text=${encodeURIComponent(message)}`;
+  }, [cartItems, totalPricePKR]);
+
+  const handleCheckout = () => {
+    const savedOrders = JSON.parse(localStorage.getItem("customerOrders") || "[]");
+    const order = {
+      id: `AMB-${Date.now().toString().slice(-6)}`,
+      date: new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      items: cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        image: item.img,
+        qty: item.quantity,
+        price: getPricePKR(item),
+      })),
+      subtotal: totalPricePKR,
+      shipping: 0,
+      total: totalPricePKR,
+      currency: "PKR",
+      paymentStatus: "Pending",
+      fulfillmentStatus: "Processing",
+    };
+
+    localStorage.setItem("customerOrders", JSON.stringify([order, ...savedOrders]));
+    clearCart();
+    setCheckoutMessage(`Checkout created: ${order.id}`);
+    window.open(checkoutUrl, "_blank", "noopener,noreferrer");
   };
-
-  const totalPricePKR = Math.round(getTotalPrice() * 360);
 
   return (
     <>
@@ -102,7 +141,7 @@ const Cart = () => {
                   {/* Price and Quantity */}
                   <div className="flex items-center justify-between mt-auto">
                     <span className="font-cinzel text-sm font-bold text-[#3c5a25]">
-                      {formatPrice(item.price)}
+                      {formatPricePKR(item)}
                     </span>
 
                     {/* Quantity Controls */}
@@ -127,7 +166,7 @@ const Cart = () => {
 
                   {/* Item Total */}
                   <p className="font-raleway text-xs text-gray-500 text-right">
-                    Subtotal: {formatPrice(parseFloat(String(item.price).replace(/[^0-9.]/g, "")) * item.quantity * 360)}
+                    Subtotal: {formatPricePKR(getPricePKR(item) * item.quantity)}
                   </p>
                 </div>
               </div>
@@ -144,13 +183,23 @@ const Cart = () => {
                 Total:
               </span>
               <span className="font-cinzel text-lg font-bold text-[#3c5a25]">
-                Rs. {totalPricePKR.toLocaleString()}
+                {formatPricePKR(totalPricePKR)}
               </span>
             </div>
 
+            {checkoutMessage && (
+              <div className="flex items-center gap-2 border border-green-200 bg-green-50 px-3 py-2 text-[11px] font-raleway text-green-700">
+                <FiCheckCircle />
+                {checkoutMessage}
+              </div>
+            )}
+
             {/* Buttons */}
             <div className="space-y-3">
-              <button className="w-full font-raleway text-sm font-bold tracking-[2px] uppercase px-6 py-3 bg-[#3c5a25] text-white hover:bg-[#adb940] transition-all duration-300">
+              <button
+                onClick={handleCheckout}
+                className="w-full font-raleway text-sm font-bold tracking-[2px] uppercase px-6 py-3 bg-[#3c5a25] text-white hover:bg-[#adb940] transition-all duration-300"
+              >
                 Checkout
               </button>
               <button

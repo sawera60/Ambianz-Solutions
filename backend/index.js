@@ -29,8 +29,6 @@ app.use(
   }),
 );
 
-// Serve uploaded images as static files
-// Access via: http://localhost:5000/uploads/coffetables/coffetable1.jpg
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //api routes

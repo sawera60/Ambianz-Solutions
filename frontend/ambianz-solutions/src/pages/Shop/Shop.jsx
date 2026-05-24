@@ -4,10 +4,9 @@ import axios from "axios";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import ProductModal from "./components/ProductModal";
 import { CartContext } from "../../context/CartContext";
+import { BACKEND_URL, getImageUrl } from "../../utils/api.js";
 
 // ─── Backend base URL ──────────────────────────────────────────────────────────
-const BACKEND_URL = "http://localhost:8000";
-
 // ─── Static product data (images served from backend /uploads static route) ───
 // This data is shown immediately. If the backend /api/product returns products
 // they will replace this array automatically.
@@ -172,6 +171,7 @@ const Shop = () => {
     const s = String(product.price || "");
     const parsed = parseFloat(s.replace(/[^0-9.]/g, ""));
     if (!Number.isFinite(parsed)) return 0;
+    if (s.includes("£")) return Math.round(parsed * GBP_TO_PKR);
     // If the static data uses GBP symbol, convert to PKR
     if (s.includes("£")) return Math.round(parsed * GBP_TO_PKR);
     // otherwise treat as already PKR
@@ -216,9 +216,13 @@ const Shop = () => {
           category: normalizeCategory(p.category),
           price: p.pprice,
           material: p.material || "Unknown",
-          img: p.image?.startsWith("http") ? p.image : `${BACKEND_URL}/uploads/${p.image}`,
+          img: getImageUrl(p.image),
         }));
-        setProducts(mapped);
+        setProducts((prevProducts) => {
+          const existingImgs = new Set(prevProducts.map((item) => item.img));
+          const additional = mapped.filter((item) => !existingImgs.has(item.img));
+          return [...prevProducts, ...additional];
+        });
       }
       // else keep STATIC_PRODUCTS
     } catch {

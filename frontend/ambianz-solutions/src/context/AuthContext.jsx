@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
+import { BACKEND_URL } from "../utils/api.js";
 
 export const authDataContext = createContext();
 
 const AuthContext = ({ children }) => {
-  const serverUrl = "http://localhost:8000";
+  const serverUrl = BACKEND_URL;
 
   const [user, setUser] = useState(() => {
     try {

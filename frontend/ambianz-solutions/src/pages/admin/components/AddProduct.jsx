@@ -10,6 +10,7 @@ import {
   FiSave,
 } from "react-icons/fi";
 import { authDataContext } from "../../../context/AuthContext.jsx";
+import { getImageUrl } from "../../../utils/api.js";
 
 export default function AddProduct({ editProduct, onCancel, onSaved }) {
   const isEditMode = !!editProduct;
@@ -27,6 +28,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
   });
 
   const [imageFileName, setImageFileName] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,7 +52,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
     } else {
       // Clear form for add mode
       setFormData({
-        id: Math.floor(100 + Math.random() * 900), // Random mock ID
+        id: "",
         Pname: "",
         pprice: "",
         category: "",
@@ -60,6 +62,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
         image: "",
       });
       setImageFileName("");
+      setImageFile(null);
     }
     setSaveSuccess(false);
   }, [editProduct, isEditMode]);
@@ -72,15 +75,14 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
     }));
   };
 
-  const handleMockUpload = (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       setImageFileName(file.name);
-      // Give it a mock URL from unsplash representing the category
+      setImageFile(file);
       setFormData((prev) => ({
         ...prev,
-        image:
-          "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=60",
+        image: "",
       }));
     }
   };
@@ -91,11 +93,20 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
     setErrorMessage("");
 
     try {
-      const payload = {
+      const payload = new FormData();
+      Object.entries({
         ...formData,
         pprice: Number(formData.pprice),
         quantity: Number(formData.quantity),
-      };
+      }).forEach(([key, value]) => {
+        if (value !== "" && value !== null && value !== undefined) {
+          payload.append(key, value);
+        }
+      });
+
+      if (imageFile) {
+        payload.append("imageFile", imageFile);
+      }
 
       if (editProduct) {
         await axios.put(`${serverUrl}/api/product/${editProduct.id}`, payload);
@@ -180,8 +191,9 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                   name="id"
                   value={formData.id}
                   onChange={handleChange}
-                  disabled={isEditMode}
-                  className={`w-full p-3.5 border border-[#e0ddd5] ${isEditMode ? "bg-gray-50 text-gray-400 cursor-not-allowed" : "bg-transparent"} font-raleway text-xs tracking-wider`}
+                  disabled
+                  placeholder="Assigned automatically"
+                  className="w-full p-3.5 border border-[#e0ddd5] bg-gray-50 text-gray-400 cursor-not-allowed font-raleway text-xs tracking-wider"
                 />
               </div>
 
@@ -258,10 +270,15 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                     <option value="Lighting">Lighting</option>
                     <option value="Wall Art">Wall Art</option>
                     <option value="Clocks">Clocks</option>
+                    <option value="Islamic Wall Art">Islamic Wall Art</option>
+                    <option value="Drawers">Drawers</option>
                     <option value="Full Length Mirror">Full Length Mirror</option>
+                    <option value="Mirror with Shelves">Mirror with Shelves</option>
                     <option value="Coffee Table">Coffee Table</option>
                     <option value="Hardware">Hardware</option>
+                    <option value="Office Chair">Office Chair</option>
                     <option value="Study Table">Study Table</option>
+                    <option value="Vanity Stool">Vanity Stool</option>
                   </select>
                   <span className="absolute right-4.5 bottom-4 text-gray-400 text-[10px] pointer-events-none">
                     ▼
@@ -309,7 +326,7 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={handleMockUpload}
+                    onChange={handleImageUpload}
                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                   />
                   <FiUploadCloud className="text-gray-400 mb-3" size={32} />
@@ -326,6 +343,13 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
                         {imageFileName}
                       </span>
                     </div>
+                  )}
+                  {isEditMode && formData.image && !imageFile && (
+                    <img
+                      src={getImageUrl(formData.image)}
+                      alt={formData.Pname || "Existing product"}
+                      className="mt-4 h-24 w-24 object-cover border border-[#e0ddd5]"
+                    />
                   )}
                 </div>
               </div>
