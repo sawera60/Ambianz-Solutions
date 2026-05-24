@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema(
     googleId: {
       type: String,
       unique: true,
+      sparse: true,
     },
     provider: {
       type: String,
@@ -49,25 +50,14 @@ const userSchema = new mongoose.Schema(
       zipCode: { type: String, default: "" },
       country: { type: String, default: "" },
     },
-    favorites: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
-    cart: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-          min: 1,
-        },
-      },
-    ],
+    favorites: {
+      type: Array,
+      default: [],
+    },
+    cart: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true, bufferCommands: false },
 );

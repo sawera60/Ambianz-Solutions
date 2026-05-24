@@ -226,3 +226,69 @@ export const logout = async (req, res) => {
     });
   }
 };
+
+// Sync Cart Controllers
+export const getUserCart = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    return res.status(200).json({
+      cart: user.cart || [],
+      success: true,
+    });
+  } catch (error) {
+    console.error("getUserCart error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};
+
+export const updateUserCart = async (req, res) => {
+  try {
+    const { cart } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { cart },
+      { new: true }
+    );
+    return res.status(200).json({
+      message: "Cart updated successfully",
+      success: true,
+      cart: user.cart,
+    });
+  } catch (error) {
+    console.error("updateUserCart error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};
+
+// Sync Favorites Controllers
+export const getUserFavorites = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    return res.status(200).json({
+      favorites: user.favorites || [],
+      success: true,
+    });
+  } catch (error) {
+    console.error("getUserFavorites error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};
+
+export const updateUserFavorites = async (req, res) => {
+  try {
+    const { favorites } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { favorites },
+      { new: true }
+    );
+    return res.status(200).json({
+      message: "Favorites updated successfully",
+      success: true,
+      favorites: user.favorites,
+    });
+  } catch (error) {
+    console.error("updateUserFavorites error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};

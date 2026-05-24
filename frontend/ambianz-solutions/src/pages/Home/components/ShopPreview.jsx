@@ -1,5 +1,9 @@
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../../../utils/api.js";
+import { FiHeart, FiShoppingCart } from "react-icons/fi";
+import { CartContext } from "../../../context/CartContext.jsx";
+import { FavoritesContext } from "../../../context/FavoritesContext.jsx";
 
 const products = [
     {
@@ -33,6 +37,9 @@ const products = [
 ];
 
 export default function ShopPreview() {
+  const { addToCart } = useContext(CartContext);
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
+
   return (
     <section className="bg-[#F8F6F1] pt-10 md:pt-16 pb-16 md:pb-24 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
@@ -84,8 +91,38 @@ export default function ShopPreview() {
                 <div className="font-cinzel text-sm md:text-base text-[#1A1C19] mb-3 group-hover:text-[#3c5a25] transition-colors">
                   {product.name}
                 </div>
-                <div className="font-raleway text-xs md:text-sm text-[#3c5a25] font-bold">
-                  {product.price}
+                <div className="flex items-center justify-between mt-3">
+                  <span className="font-cinzel text-sm font-bold text-[#3c5a25]">
+                    {product.price}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleFavorite(product);
+                      }}
+                      className="p-2 rounded border border-[#f0f0f0] bg-white text-gray-600 hover:bg-[#f3f6f1]"
+                    >
+                      <FiHeart
+                        className={
+                          isFavorite(product.id)
+                            ? "fill-[#adb940] text-[#adb940]"
+                            : ""
+                        }
+                      />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                      className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]"
+                    >
+                      <FiShoppingCart />
+                    </button>
+                  </div>
                 </div>
               </div>
             </Link>

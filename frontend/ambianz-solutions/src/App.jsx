@@ -21,6 +21,7 @@ import CafeDetail from "./pages/Services/components/CafeDetail";
 import SubNavbar from "./pages/Services/components/SubNavbar";
 import { QuoteModalProvider, useQuoteModal } from "./context/QuoteModalContext";
 import CartProvider from "./context/CartContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 import Dashboard from "./pages/admin/Dashboard";
 
 // Helper component to render the modal since it needs the context
@@ -65,12 +66,14 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <CartProvider>
-      <QuoteModalProvider>
-        <AppContent />
-        <Cart />
-      </QuoteModalProvider>
-    </CartProvider>
+    <FavoritesProvider>
+      <CartProvider>
+        <QuoteModalProvider>
+          <AppContent />
+          <Cart />
+        </QuoteModalProvider>
+      </CartProvider>
+    </FavoritesProvider>
   );
 };
 

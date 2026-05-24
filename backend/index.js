@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import authRouter from "./routes/auth.routes.js";
 import quoteRouter from "./routes/quote.routes.js";
 import productRouter from "./routes/product.routes.js";
+import orderRouter from "./routes/order.routes.js";
 
 dotenv.config();
 const app = express();
@@ -35,6 +36,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRouter);
 app.use("/api", quoteRouter);
 app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
 
 app.listen(PORT, () => {
   connectDB();

@@ -4,14 +4,12 @@ import axios from "axios";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import ProductModal from "./components/ProductModal";
 import { CartContext } from "../../context/CartContext";
+import { FavoritesContext } from "../../context/FavoritesContext";
 import { BACKEND_URL, getImageUrl } from "../../utils/api.js";
 
-// ─── Backend base URL ──────────────────────────────────────────────────────────
-// ─── Static product data (images served from backend /uploads static route) ───
-// This data is shown immediately. If the backend /api/product returns products
-// they will replace this array automatically.
+
 const STATIC_PRODUCTS = [
-  // ── Wall Art ──────────────────────────────────────────────────────────────
+  // Wall Art 
   { id: 1, name: "Abstract Wall Panel", category: "Wall Art", price: "£85", material: "Canvas", img: `${BACKEND_URL}/uploads/islamic%20wall%20art/wallart1.jpg` },
   { id: 2, name: "Modern Wall Composition", category: "Wall Art", price: "£120", material: "Canvas", img: `${BACKEND_URL}/uploads/islamic%20wall%20art/wallart2.jpg` },
   { id: 3, name: "Geometric Wall Piece", category: "Wall Art", price: "£95", material: "Metal", img: `${BACKEND_URL}/uploads/islamic%20wall%20art/wallart4.jpg` },
@@ -147,6 +145,7 @@ const CATEGORIES = [
 // ─── Component ─────────────────────────────────────────────────────────────────
 const Shop = () => {
   const { addToCart } = useContext(CartContext);
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
   const GBP_TO_PKR = 360;
   const SKIPPED_PRODUCT_IDS = [2, 7, 10, 13];
   const PRODUCTS_PER_PAGE = 16;
@@ -583,7 +582,7 @@ const Shop = () => {
                       {product.category}
                     </span>
                   </div>
-                    <div className="p-4 flex flex-col gap-2">
+                  <div className="p-4 flex flex-col gap-2">
                     <h4 className="font-cinzel text-sm font-semibold text-[#1A1C19] group-hover:text-[#3c5a25] transition-colors leading-tight">
                       {product.name}
                     </h4>
@@ -594,9 +593,17 @@ const Shop = () => {
                       <span className="font-cinzel text-sm font-bold text-[#3c5a25]">
                         {formatPricePKR(product)}
                       </span>
-                    <div className="flex items-center gap-3">
-                        <button onClick={(e) => e.stopPropagation()} className="p-2 rounded border border-[#f0f0f0] bg-white text-gray-600 hover:bg-[#f3f6f1]">
-                          <FiHeart />
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleFavorite(product); }}
+                          className={`p-2 rounded border bg-white transition-all duration-200 ${
+                            isFavorite(product.id)
+                              ? "border-[#adb940] text-[#adb940]"
+                              : "border-[#f0f0f0] text-gray-600 hover:bg-[#f3f6f1]"
+                          }`}
+                          title={isFavorite(product.id) ? "Remove from Favorites" : "Add to Favorites"}
+                        >
+                          <FiHeart className={isFavorite(product.id) ? "fill-[#adb940]" : ""} />
                         </button>
                         <button onClick={(e) => { e.stopPropagation(); addToCart(product); }} className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]">
                           <FiShoppingCart />
@@ -626,7 +633,7 @@ const Shop = () => {
                       {product.category}
                     </span>
                   </div>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full p-4 md:px-8 gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full p-4 md:px-8 gap-4">
                     <div className="flex flex-col gap-1">
                       <h4 className="font-cinzel text-base font-semibold text-[#1A1C19] group-hover:text-[#3c5a25] transition-colors">
                         {product.name}
@@ -640,8 +647,16 @@ const Shop = () => {
                         {formatPricePKR(product)}
                       </span>
                       <div className="flex items-center gap-3">
-                        <button onClick={(e) => e.stopPropagation()} className="p-2 rounded border border-[#f0f0f0] bg-white text-gray-600 hover:bg-[#f3f6f1]">
-                          <FiHeart />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleFavorite(product); }}
+                          className={`p-2 rounded border bg-white transition-all duration-200 ${
+                            isFavorite(product.id)
+                              ? "border-[#adb940] text-[#adb940]"
+                              : "border-[#f0f0f0] text-gray-600 hover:bg-[#f3f6f1]"
+                          }`}
+                          title={isFavorite(product.id) ? "Remove from Favorites" : "Add to Favorites"}
+                        >
+                          <FiHeart className={isFavorite(product.id) ? "fill-[#adb940]" : ""} />
                         </button>
                         <button onClick={(e) => { e.stopPropagation(); addToCart(product); }} className="p-2 rounded border border-[#f0f0f0] bg-white text-[#3c5a25] hover:bg-[#e6f1e6]">
                           <FiShoppingCart />

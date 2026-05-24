@@ -1,9 +1,13 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { getPricePKR } from "../utils/pricing.js";
+import axios from "axios";
+import { authDataContext } from "./AuthContext.jsx";
 
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
+  const { user, serverUrl } = useContext(authDataContext);
+
   const [cartItems, setCartItems] = useState(() => {
     try {
       const savedCart = localStorage.getItem("cart");
@@ -20,6 +24,30 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
+
+  // Sync cart to backend when logged in and cart changes
+  useEffect(() => {
+    if (!user || !serverUrl) return;
+    const timeout = setTimeout(() => {
+      axios
+        .post(`${serverUrl}/api/auth/cart`, { cart: cartItems }, { withCredentials: true })
+        .catch((err) => console.error("Cart sync error:", err));
+    }, 800); // debounce 800ms
+    return () => clearTimeout(timeout);
+  }, [cartItems, user, serverUrl]);
+
+  // Load cart from backend when user logs in
+  useEffect(() => {
+    if (!user || !serverUrl) return;
+    axios
+      .get(`${serverUrl}/api/auth/cart`, { withCredentials: true })
+      .then((res) => {
+        if (res.data && res.data.cart && res.data.cart.length > 0) {
+          setCartItems(res.data.cart);
+        }
+      })
+      .catch((err) => console.error("Load cart error:", err));
+  }, [user, serverUrl]);
 
   const addToCart = (product, quantity = 1) => {
     setCartItems((prevItems) => {
