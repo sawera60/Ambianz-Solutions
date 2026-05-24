@@ -34,7 +34,6 @@ export default function Navbar() {
     window.addEventListener("storage", handler);
     return () => window.removeEventListener("storage", handler);
   }, []);
-  const [searchOpen, setSearchOpen] = useState(false);
   const { openQuoteModal } = useQuoteModal();
 
   return (

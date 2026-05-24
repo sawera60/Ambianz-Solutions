@@ -10,6 +10,7 @@ import {
   deleteProduct,
   seedProducts,
 } from "../controllers/product.controller.js";
+import { isAuthenticated, isAdmin } from "../middlewares/auth.middleware.js";
 
 const productRouter = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -59,12 +60,12 @@ const handleProductImageUpload = (req, res, next) => {
 
 // Mounted in index.js as: app.use("/api/product", productRouter)
 // So these routes are: GET /api/product  POST /api/product  etc.
-productRouter.post("/", handleProductImageUpload, createProduct);
+productRouter.post("/", isAuthenticated, isAdmin, handleProductImageUpload, createProduct);
 productRouter.get("/", getProducts);
-productRouter.put("/:id", handleProductImageUpload, updateProduct);
-productRouter.delete("/:id", deleteProduct);
+productRouter.put("/:id", isAuthenticated, isAdmin, handleProductImageUpload, updateProduct);
+productRouter.delete("/:id", isAuthenticated, isAdmin, deleteProduct);
 
 // Seeder - scans backend/uploads and creates product documents
-productRouter.post("/seed", seedProducts);
+productRouter.post("/seed", isAuthenticated, isAdmin, seedProducts);
 
 export default productRouter;

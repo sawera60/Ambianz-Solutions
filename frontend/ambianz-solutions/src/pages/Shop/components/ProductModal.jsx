@@ -1,33 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { FiHeart, FiShoppingCart, FiX } from "react-icons/fi";
 import { CartContext } from "../../../context/CartContext.jsx";
+import { FavoritesContext } from "../../../context/FavoritesContext.jsx";
 import { formatPricePKR } from "../../../utils/pricing.js";
 
 const ProductModal = ({ product, onClose }) => {
-  const [isFav, setIsFav] = useState(false);
   const { addToCart } = useContext(CartContext);
-
-  useEffect(() => {
-    if (!product) return;
-    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-    setIsFav(favs.includes(product.id));
-  }, [product]);
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
 
   if (!product) return null;
 
-  const toggleFav = () => {
-    const favs = JSON.parse(localStorage.getItem("favorites") || "[]");
-    let next;
-    if (favs.includes(product.id)) {
-      next = favs.filter((id) => id !== product.id);
-      setIsFav(false);
-    } else {
-      next = [...favs, product.id];
-      setIsFav(true);
-    }
-    localStorage.setItem("favorites", JSON.stringify(next));
-    window.dispatchEvent(new Event("storage"));
-  };
+  const isFav = isFavorite(product.id);
 
   return (
     <div onClick={onClose} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -48,7 +31,7 @@ const ProductModal = ({ product, onClose }) => {
               <button onClick={() => addToCart(product)} className="px-4 py-2 bg-[#3c5a25] text-white rounded flex items-center gap-2">
                 <FiShoppingCart /> Add to Cart
               </button>
-              <button onClick={toggleFav} className={`px-3 py-2 rounded border flex items-center gap-2 ${isFav ? "bg-[#fdecec] text-[#b91c1c]" : "bg-white text-gray-700"}`}>
+              <button onClick={() => toggleFavorite(product)} className={`px-3 py-2 rounded border flex items-center gap-2 ${isFav ? "bg-[#fdecec] text-[#b91c1c]" : "bg-white text-gray-700"}`}>
                 <FiHeart /> {isFav ? "Remove" : "Favorite"}
               </button>
             </div>

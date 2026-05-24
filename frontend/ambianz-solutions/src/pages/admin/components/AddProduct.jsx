@@ -109,9 +109,13 @@ export default function AddProduct({ editProduct, onCancel, onSaved }) {
       }
 
       if (editProduct) {
-        await axios.put(`${serverUrl}/api/product/${editProduct.id}`, payload);
+        await axios.put(`${serverUrl}/api/product/${editProduct.id}`, payload, {
+          withCredentials: true,
+        });
       } else {
-        await axios.post(`${serverUrl}/api/product`, payload);
+        await axios.post(`${serverUrl}/api/product`, payload, {
+          withCredentials: true,
+        });
       }
 
       setSaveSuccess(true);

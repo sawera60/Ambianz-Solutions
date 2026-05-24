@@ -11,7 +11,6 @@ import typo1 from "../../../images/grandpivotentrance.png";
 import typo2 from "../../../images/minimalsliding.png";
 import typo3 from "../../../images/industrial bifold.png";
 import typo4 from "../../../images/lacquered.png";
-import techImg from "../../../images/hiddenhinges.png";
 import precisionImg from "../../../images/invisibleprecision.png";
 import ctaBg from "../../../images/interior3.jpg";
 

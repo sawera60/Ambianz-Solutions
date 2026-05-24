@@ -110,7 +110,7 @@ const Cart = () => {
                 {/* Product Image */}
                 <div className="w-24 h-24 shrink-0 rounded overflow-hidden bg-[#f8f6f1]">
                   <img
-                    src={item.img}
+                    src={item.img || item.image}
                     alt={item.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {

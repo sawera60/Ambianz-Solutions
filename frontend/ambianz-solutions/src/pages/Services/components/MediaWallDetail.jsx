@@ -12,13 +12,6 @@ import portfolioMedia2 from "../../../images/displaymediawall.png";
 import portfolioMedia1 from "../../../images/3d-mediawall/mediawall2.jpg";
 import portfolioMedia3 from "../../../images/bespokemediawall.png";
 import portfolioMedia4 from "../../../images/mediawall.jpg";
-import hiddenStorage from "../../../images/hiddenstorage.png";
-import ledConsole from "../../../images/ledconsole.png";
-import cabinetry from "../../../images/cabinetry.png";
-import pentsuite from "../../../images/pentsuite.png";
-import modernmanor from "../../../images/modernmanor.png";
-import brutalistloft from "../../../images/brutalistloft.png";
-import azurevila from "../../../images/azurevila.png";
 import ctaBg from "../../../images/interior5.jpg";
 
 const MediaWallDetail = () => {

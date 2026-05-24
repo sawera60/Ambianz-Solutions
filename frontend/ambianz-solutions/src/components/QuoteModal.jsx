@@ -14,6 +14,8 @@ import {
   FiLayers,
 } from "react-icons/fi";
 
+const MotionDiv = motion.div;
+
 const QuoteModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -69,7 +71,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
       {isOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
           {/* Overlay */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -78,7 +80,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
           />
 
           {/* Modal Content */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -223,7 +225,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
                 Request Quote
               </button>
             </form>
-          </motion.div>
+          </MotionDiv>
         </div>
       )}
     </AnimatePresence>

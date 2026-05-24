@@ -88,7 +88,9 @@ export default function QuotesRequest() {
     setErrorMessage("");
 
     try {
-      const response = await axios.get(`${serverUrl}/api/quote`);
+      const response = await axios.get(`${serverUrl}/api/quote`, {
+        withCredentials: true,
+      });
       if (response.data?.success) {
         const formatted = response.data.quotes.map((quote) => ({
           id: quote._id,

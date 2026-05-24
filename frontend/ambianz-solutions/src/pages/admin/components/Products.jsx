@@ -53,7 +53,9 @@ export default function Products({ refreshTrigger, onEditProduct, onNavigateToAd
     }
 
     try {
-      await axios.delete(`${serverUrl}/api/product/${id}`);
+      await axios.delete(`${serverUrl}/api/product/${id}`, {
+        withCredentials: true,
+      });
       setProductList((prev) => prev.filter((p) => p.id !== id));
     } catch {
       window.alert("Unable to delete product. Please try again.");

@@ -160,6 +160,13 @@ export const deleteProduct = async (req, res) => {
 
 export const seedProducts = async (req, res) => {
   try {
+    if (process.env.ALLOW_PRODUCT_SEED !== "true") {
+      return res.status(403).json({
+        message: "Product seeding is disabled",
+        success: false,
+      });
+    }
+
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const uploadsDir = path.join(__dirname, "..", "uploads");

@@ -7,6 +7,45 @@ import { CartContext } from "../../context/CartContext";
 import { FavoritesContext } from "../../context/FavoritesContext";
 import { BACKEND_URL, getImageUrl } from "../../utils/api.js";
 
+const localProductImages = import.meta.glob(
+  [
+    "../../images/coffetables/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/drawers/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/fulllenthmirror/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/hardware/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/islamic wall art/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/lighting/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/mirrorwithshelves/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/officechairs/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/studytable/*.{jpg,jpeg,png,webp,jfif}",
+    "../../images/vanity stool/*.{jpg,jpeg,png,webp,jfif}",
+  ],
+  {
+    eager: true,
+    import: "default",
+    query: "?url",
+  },
+);
+
+const normalizeImagePath = (imagePath) =>
+  decodeURIComponent(String(imagePath || ""))
+    .replace(/\\/g, "/")
+    .replace(/^.*\/uploads\//i, "")
+    .replace(/^.*\/images\//i, "")
+    .replace(/^\/+/, "")
+    .toLowerCase();
+
+const localProductImageMap = Object.fromEntries(
+  Object.entries(localProductImages).map(([path, src]) => [
+    normalizeImagePath(path),
+    src,
+  ]),
+);
+
+const getLocalProductImage = (product) => {
+  const imagePath = normalizeImagePath(product.img || product.image);
+  return localProductImageMap[imagePath] || "";
+};
 
 const STATIC_PRODUCTS = [
   // Wall Art 
@@ -143,6 +182,13 @@ const CATEGORIES = [
 ];
 
 // ─── Component ─────────────────────────────────────────────────────────────────
+const INITIAL_PRODUCTS = STATIC_PRODUCTS.map((product) => ({
+  ...product,
+  id: `static-${product.id}`,
+  sourceId: product.id,
+  img: getLocalProductImage(product),
+}));
+
 const Shop = () => {
   const { addToCart } = useContext(CartContext);
   const { toggleFavorite, isFavorite } = useContext(FavoritesContext);
@@ -160,7 +206,7 @@ const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [priceRangeBounds, setPriceRangeBounds] = useState([0, 1000]);
   const [page, setPage] = useState(1);
-  const [products, setProducts] = useState(STATIC_PRODUCTS);
+  const [products, setProducts] = useState(INITIAL_PRODUCTS);
   const [loading, setLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -210,16 +256,22 @@ const Shop = () => {
       // API returns { message, success, products }
       if (res.data && res.data.products && res.data.products.length > 0) {
         const mapped = res.data.products.map((p, i) => ({
-          id: p._id || p.id || i,
+          id: `backend-${p._id || p.id || i}`,
+          sourceId: p.id || p._id || i,
           name: p.Pname || p.name,
           category: normalizeCategory(p.category),
           price: p.pprice,
           material: p.material || "Unknown",
           img: getImageUrl(p.image),
+          description: p.description,
+          quantity: p.quantity,
         }));
         setProducts((prevProducts) => {
-          const existingImgs = new Set(prevProducts.map((item) => item.img));
-          const additional = mapped.filter((item) => !existingImgs.has(item.img));
+          const existingIds = new Set(prevProducts.map((item) => item.id));
+          const existingImgs = new Set(prevProducts.map((item) => item.img).filter(Boolean));
+          const additional = mapped.filter(
+            (item) => !existingIds.has(item.id) && !existingImgs.has(item.img),
+          );
           return [...prevProducts, ...additional];
         });
       }
@@ -270,7 +322,7 @@ const Shop = () => {
   });
 
   const filtered = filteredByCategoryAndSearch.filter((product, index, arr) => {
-    if (SKIPPED_PRODUCT_IDS.includes(product.id)) return false;
+    if (SKIPPED_PRODUCT_IDS.includes(product.sourceId || product.id)) return false;
     if (product.category === "Coffee Table") {
       const previousCoffeeCount = arr.slice(0, index).filter((item) => item.category === "Coffee Table").length;
       if (previousCoffeeCount >= 6) return false;

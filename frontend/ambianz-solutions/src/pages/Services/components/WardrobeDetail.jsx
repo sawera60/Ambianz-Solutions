@@ -42,7 +42,7 @@ const WardrobeDetail = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </section> 
 
       {/* 2. COUTURE MINDSET SECTION */}
       <section className="max-w-[1200px] mx-auto py-24 px-8 flex flex-col md:flex-row gap-20 items-center">

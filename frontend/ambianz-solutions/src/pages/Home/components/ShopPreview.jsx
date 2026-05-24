@@ -1,38 +1,49 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { getImageUrl } from "../../../utils/api.js";
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import { CartContext } from "../../../context/CartContext.jsx";
 import { FavoritesContext } from "../../../context/FavoritesContext.jsx";
+import coffeeTableImage from "../../../images/coffeetable.jpg";
+import mirrorImage from "../../../images/closet.jpg";
+import wallArtImage from "../../../images/interior7.jpg";
+import officeChairImage from "../../../images/officefurniture.png";
+import chair5 from "../../../images/chair5.jpg";
+import mirrorwithshelf1 from "../../../images/mirrorwithshelf1.jpg";
+import coffetable10 from "../../../images/coffetable10.jpg";
+import wallart7 from "../../../images/wallart7.jpg";
 
 const products = [
     {
-        id: 1,
+        id: "preview-coffee-table",
         category: "Coffee Table",
         name: "Study Coffee Table",
         price: "Rs. 32,000",
-        image: getImageUrl("coffetables/coffetable3.jpg"),
+        image: coffetable10,
+        img: coffeeTableImage,
     },
     {
-        id: 2,
+        id: "preview-mirror-shelf",
         category: "Mirror with Shelves",
         name: "Floating Mirror Shelf",
         price: "Rs. 28,000",
-        image: getImageUrl("mirrorwithshelves/mirrorwithshelf3.jpg"),
+        image: mirrorwithshelf1,
+        img: mirrorImage,
     },
     {
-        id: 3,
+        id: "preview-wall-panel",
         category: "Wall Art",
         name: "Abstract Wall Panel",
         price: "Rs. 18,000",
-        image: getImageUrl("islamic wall art/wallart7.jpg"),
+        image: wallart7,
+        img: wallArtImage,
     },
     {
-        id: 4,
+        id: "preview-office-chair",
         category: "Office Chair",
         name: "Study Chair",
         price: "Rs. 24,000",
-        image: getImageUrl("officechairs/chair5.jpg"),
+        image: chair5,
+        img: officeChairImage,
     },
 ];
 

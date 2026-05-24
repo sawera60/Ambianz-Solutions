@@ -1,5 +1,5 @@
 export const BACKEND_URL =
-  import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:5000";
 
 export const getImageUrl = (imagePath) => {
   if (!imagePath) return "";

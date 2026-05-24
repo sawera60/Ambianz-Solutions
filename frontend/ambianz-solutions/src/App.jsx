@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Home from "./pages/Home/Home";
 import Services from "./pages/Services/Services";
 import Navbar from "./components/Navbar";
@@ -7,7 +7,7 @@ import Shop from "./pages/Shop/Shop";
 import Projects from "./pages/Projects/Projects";
 import SignIn from "./components/Auth/SignIn";
 import SignUp from "./components/Auth/SignUp";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ScrollToTop from "./components/ScrollToTop";
 import Favorites from "./components/Favorites/Favorites";
@@ -23,11 +23,21 @@ import { QuoteModalProvider, useQuoteModal } from "./context/QuoteModalContext";
 import CartProvider from "./context/CartContext";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import Dashboard from "./pages/admin/Dashboard";
+import { authDataContext } from "./context/AuthContext.jsx";
 
 // Helper component to render the modal since it needs the context
 const GlobalModal = () => {
   const { isQuoteModalOpen, closeQuoteModal } = useQuoteModal();
   return <QuoteModal isOpen={isQuoteModalOpen} onClose={closeQuoteModal} />;
+};
+
+const AdminRoute = () => {
+  const { user } = useContext(authDataContext);
+
+  if (!user) return <Navigate to="/signin" replace />;
+  if (user.role !== "admin") return <Navigate to="/" replace />;
+
+  return <Dashboard />;
 };
 
 const AppContent = () => {
@@ -54,7 +64,7 @@ const AppContent = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin" element={<AdminRoute />} />
         </Routes>
       </main>
       {!isAdmin && <GlobalModal />}

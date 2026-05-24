@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { authDataContext } from "../../context/AuthContext";
 import { auth, googleProvider } from "../../firebase.js";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -60,33 +60,18 @@ export default function SignUp() {
   const handleGoogleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const provider = new GoogleAuthProvider();
-      // This triggers the browser popup window
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, googleProvider);
 
       // The result object contains the logged-in Google user information
       const user = result.user;
-      const name = user.displayName
-        ? user.displayName.split(" ")
-        : ["User", ""];
-      const firstName = name[0];
-      const lastName = name.slice(1).join(" ") || "Google";
-      const email = user.email;
+      const idToken = await user.getIdToken();
       const phoneNumber = user.phoneNumber || "";
-      const googleId = user.uid;
-      const avatar = user.photoURL || "";
-      const providerType = "google";
 
       const response = await axios.post(
         serverUrl + "/api/auth/google",
         {
-          firstName,
-          lastName,
-          email,
+          idToken,
           phoneNumber,
-          googleId,
-          avatar,
-          provider: providerType,
         },
         { withCredentials: true },
       );

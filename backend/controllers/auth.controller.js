@@ -1,10 +1,19 @@
 import { User } from "../models/user.model.js";
 import generateToken from "../config/token.js";
 import bcrypt from "bcrypt";
+import { verifyFirebaseIdToken } from "../config/firebaseAdmin.js";
+
+const setAuthCookie = (res, token) => {
+  res.cookie("jwt", token, {
+    maxAge: 15 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+};
 
 // Auth Controller for normal signup
 export const signUp = async (req, res) => {
-  console.log("signUp controller called with body:", req.body);
   try {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
 
@@ -46,12 +55,7 @@ export const signUp = async (req, res) => {
 
     // 3rd step -> Generate token and save in cookies
     const token = generateToken(createUser._id);
-    res.cookie("jwt", token, {
-      maxAge: 15 * 24 * 60 * 60 * 1000, // milliseconds
-      httpOnly: true, // prevents XSS attacks
-      sameSite: "strict", // prevents CSRF attacks
-      secure: process.env.NODE_ENV === "production",
-    });
+    setAuthCookie(res, token);
 
     // Don't send back password
     const userResponse = createUser.toObject();
@@ -66,7 +70,7 @@ export const signUp = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       message: "Internal Server Error",
-      error: error.message,
+      success: false,
     });
   }
 };
@@ -75,15 +79,22 @@ export const signUp = async (req, res) => {
 
 export const googleSignUp = async (req, res) => {
   try {
-    const {
-      email,
-      firstName,
-      lastName,
-      avatar,
-      googleId,
-      provider,
-      phoneNumber,
-    } = req.body;
+    const { idToken, phoneNumber } = req.body;
+    const decodedToken = await verifyFirebaseIdToken(idToken);
+    const email = decodedToken.email;
+    const googleId = decodedToken.uid;
+    const avatar = decodedToken.picture || "";
+    const provider = "google";
+    const displayName = decodedToken.name || "Google User";
+    const [firstName = "Google", ...lastNameParts] = displayName.split(" ");
+    const lastName = lastNameParts.join(" ") || "User";
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Google account email is required",
+        success: false,
+      });
+    }
 
     // Check if the user is already registered in DB
     const existingUser = await User.findOne({ email });
@@ -102,12 +113,7 @@ export const googleSignUp = async (req, res) => {
 
       // 2nd step: Generate JWT token and save it in cookies
       const token = generateToken(newuser._id);
-      res.cookie("jwt", token, {
-        maxAge: 15 * 24 * 60 * 60 * 1000, // milliseconds
-        httpOnly: true, // prevents XSS attacks
-        sameSite: "strict", // prevents CSRF attacks
-        secure: process.env.NODE_ENV === "production",
-      });
+      setAuthCookie(res, token);
 
       // Don't send back password (even if empty)
       const userResponse = newuser.toObject();
@@ -121,12 +127,7 @@ export const googleSignUp = async (req, res) => {
     } else {
       // User exists, login them in
       const token = generateToken(existingUser._id);
-      res.cookie("jwt", token, {
-        maxAge: 15 * 24 * 60 * 60 * 1000, // milliseconds
-        httpOnly: true, // prevents XSS attacks
-        sameSite: "strict", // prevents CSRF attacks
-        secure: process.env.NODE_ENV === "production",
-      });
+      setAuthCookie(res, token);
 
       // Update their google credentials and provider if they were not linked before
       if (!existingUser.googleId) {
@@ -147,9 +148,9 @@ export const googleSignUp = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
-      message: "Internal Server Error",
-      error: error.message,
+    return res.status(error.statusCode || 500).json({
+      message: error.statusCode ? error.message : "Internal Server Error",
+      success: false,
     });
   }
 };
@@ -176,6 +177,13 @@ export const signIn = async (req, res) => {
     }
 
     // Check password
+    if (!user.password) {
+      return res.status(400).json({
+        message: "Please sign in with Google for this account",
+        success: false,
+      });
+    }
+
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
       return res.status(400).json({
@@ -186,12 +194,7 @@ export const signIn = async (req, res) => {
 
     // Generate token and save in cookies
     const token = generateToken(user._id);
-    res.cookie("jwt", token, {
-      maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production",
-    });
+    setAuthCookie(res, token);
 
     const userResponse = user.toObject();
     delete userResponse.password;
@@ -205,7 +208,7 @@ export const signIn = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       message: "Internal Server Error",
-      error: error.message,
+      success: false,
     });
   }
 };
@@ -213,7 +216,12 @@ export const signIn = async (req, res) => {
 // Logout Controller
 export const logout = async (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.cookie("jwt", "", {
+      maxAge: 0,
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
     return res.status(200).json({
       message: "Logged out successfully",
       success: true,
@@ -222,7 +230,7 @@ export const logout = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       message: "Internal Server Error",
-      error: error.message,
+      success: false,
     });
   }
 };
